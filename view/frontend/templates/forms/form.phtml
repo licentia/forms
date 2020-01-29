@@ -1,0 +1,145 @@
+<?php
+/**
+ * Copyright (C) 2020 Licentia, Unipessoal LDA
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * @title      Licentia Panda - Magento® Sales Automation Extension
+ * @package    Licentia
+ * @author     Bento Vilas Boas <bento@licentia.pt>
+ * @copyright  Copyright (c) Licentia - https://licentia.pt
+ * @license    GNU General Public License V3
+ * @modified   29/01/20, 15:22 GMT
+ *
+ */
+
+/** @var \Licentia\Forms\Block\Form\Form $block */
+
+/** @var \Licentia\Forms\Model\Forms $form */
+$form = $block->getForm();
+
+if (!$block->isEnabled()) {
+    echo /* @noEscape */
+    __('Form Not Available Anymore');
+
+    return;
+}
+
+$elements = $form->getActiveElements();
+/*
+    <script type="text/javascript">
+        require(['jquery'], function ($) {
+            var pandaSubmitted = false;
+
+            $('#panda-submit-form-<?= $form->getId() ?>').submit(function (event) {
+                $('#panda-submit-form-<?= $form->getId() ?>')
+                    .text('<?=  __('Please wait...') ?>');
+                pandaSubmitted = true;
+                //$('#form-<?= $form->getId() ?>').submit();
+            });
+
+            $(document).ajaxComplete(function () {
+                if (pandaSubmitted === true) {
+                    $('#panda-submit-form-<?= $form->getId() ?>')
+                        .text('<?=  __(
+                            $block->isEditing() ? $form->getUpdateLabel() : $form->getSubmitLabel()
+                        ) ?>');
+                }
+            });
+        });
+    </script>
+*/
+?>
+
+<?php if (!$block->canUserSubmit()): ?>
+
+    <div class="message notice"><?= /* @noEscape */
+        __(
+            'Please <a href="%1">Login</a> to Submit Your Data',
+            $block->getUrl('customer/account/login')
+        ) ?></div>
+
+<?php endif; ?>
+
+<?php if ($block->canUserSubmit() === 2): ?>
+
+    <div class="message notice"><?= /* @noEscape */
+        __(
+            '<a href="%1">Login</a> to view the form',
+            $block->getUrl('customer/account/login')
+        ) ?></div>
+
+<?php endif; ?>
+
+
+<?php if ($block->canUserSubmit() === true): ?>
+
+    <form enctype="multipart/form-data" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+          data-mage-init='{"validation":{}}' id="form-<?= /* @noEscape */
+    $form->getId() ?>"
+          class="panda form <?= /* @noEscape */
+          $form->getData('css_class') ?>"
+          action="<?= /* @noEscape */
+          $block->getUrl('pandaf/form/save',
+              ['form_id' => $form->getId(), '_secure' => true]) ?>"
+          method="post">
+
+        <?php if (!$form->getEnableTemplate()): ?>
+
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= /* @noEscape */
+                        __($form->getTitle()) ?></span></legend>
+                <br/>
+                <div class="field note no-label"><?= /* @noEscape */
+                    __($form->getDescription()) ?></div>
+                <?php foreach ($elements as $element): ?>
+
+                    <?= /* @noEscape */
+                    $block->getElementHtml($element); ?>
+
+                <?php endforeach; ?>
+
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+
+                    <?php if ($block->canUserSubmit()):
+
+                        echo /* @noEscape */
+                        $block->getSubmitButton();
+
+                    endif; ?>
+
+                </div>
+            </div>
+        <?php else: ?>
+
+            <?= /* @noEscape */
+            $block->parseTemplate() ?>
+
+        <?php endif; ?>
+    </form>
+
+<?php endif; ?>
+
+<?php if (!$block->canUserSubmit()): ?>
+
+    <div class="message notice"><?= /* @noEscape */
+        __(
+            'Please <a href="%1">Login</a> to Submit Your Data',
+            $block->getUrl('customer/account/login')
+        ) ?></div>
+
+<?php endif; ?>
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" ?><!--
+  ~ Copyright (C) 2020 Licentia, Unipessoal LDA
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  ~
+  ~ @title      Licentia Panda - Magento® Sales Automation Extension
+  ~ @package    Licentia
+  ~ @author     Bento Vilas Boas <bento@licentia.pt>
+  ~ @copyright  Copyright (c) Licentia - https://licentia.pt
+  ~ @license    GNU General Public License V3
+  ~ @modified   29/01/20, 15:22 GMT
+  ~
+  -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+
+    <route method="POST" url="/V1/panda/forms">
+        <service class="Licentia\Forms\Api\FormsRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/forms/search">
+        <service class="Licentia\Forms\Api\FormsRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/forms/:formsId">
+        <service class="Licentia\Forms\Api\FormsRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/panda/forms/:formsId">
+        <service class="Licentia\Forms\Api\FormsRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/V1/panda/forms/:formsId">
+        <service class="Licentia\Forms\Api\FormsRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+
+
+    <route method="POST" url="/V1/panda/formelements">
+        <service class="Licentia\Forms\Api\FormElementsRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/formelements/search">
+        <service class="Licentia\Forms\Api\FormElementsRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/formelements/:formelementsId">
+        <service class="Licentia\Forms\Api\FormElementsRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/panda/formelements/:formelementsId">
+        <service class="Licentia\Forms\Api\FormElementsRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/V1/panda/formelements/:formelementsId">
+        <service class="Licentia\Forms\Api\FormElementsRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+
+
+    <route method="POST" url="/V1/panda/formentries">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/formentries/search">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/formentries/:formentriesId">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/formentries/display/:formentriesId">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="getByIdDisplay"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/panda/formentries/code/:code">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="getListByCode"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/panda/formentries/:formentriesId">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/V1/panda/formentries/:formentriesId">
+        <service class="Licentia\Forms\Api\FormEntriesRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Licentia_Forms::forms"/>
+        </resources>
+    </route>
+
+</routes>

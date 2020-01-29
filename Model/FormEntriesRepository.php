@@ -1,0 +1,267 @@
+<?php
+/**
+ * Copyright (C) 2020 Licentia, Unipessoal LDA
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * @title      Licentia Panda - Magento® Sales Automation Extension
+ * @package    Licentia
+ * @author     Bento Vilas Boas <bento@licentia.pt>
+ * @copyright  Copyright (c) Licentia - https://licentia.pt
+ * @license    GNU General Public License V3
+ * @modified   29/01/20, 15:22 GMT
+ *
+ */
+
+namespace Licentia\Forms\Model;
+
+use Licentia\Forms\Api\Data\FormEntriesInterfaceFactory;
+use Licentia\Forms\Api\Data\FormEntriesSearchResultsInterfaceFactory;
+use Licentia\Forms\Api\FormEntriesRepositoryInterface;
+use Licentia\Forms\Model\ResourceModel\FormEntries as ResourceFormEntries;
+use Licentia\Forms\Model\ResourceModel\FormEntries\CollectionFactory as FormEntriesCollectionFactory;
+use Magento\Framework\Api\DataObjectHelper;
+use Magento\Framework\Api\SortOrder;
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Reflection\DataObjectProcessor;
+use Magento\Store\Model\StoreManagerInterface;
+
+/**
+ * Class FormEntriesRepository
+ *
+ * @package Licentia\Forms\Model
+ */
+class FormEntriesRepository implements FormEntriesRepositoryInterface
+{
+
+    /**
+     * @var DataObjectHelper
+     */
+    protected $dataObjectHelper;
+
+    /**
+     * @var
+     */
+    protected $FormEntriesFactory;
+
+    /**
+     * @var
+     */
+    protected $FormEntriesCollectionFactory;
+
+    /**
+     * @var FormEntriesSearchResultsInterfaceFactory
+     */
+    protected $searchResultsFactory;
+
+    /**
+     * @var FormEntriesInterfaceFactory
+     */
+    protected $dataFormEntriesFactory;
+
+    /**
+     * @var FormEntriesFactory
+     */
+    protected $formEntriesFactory;
+
+    /**
+     * @var FormEntriesCollectionFactory
+     */
+    protected $formEntriesCollectionFactory;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
+     * @var ResourceFormEntries
+     */
+    protected $resource;
+
+    /**
+     * @var DataObjectProcessor
+     */
+    protected $dataObjectProcessor;
+
+    /**
+     * @param ResourceFormEntries                      $resource
+     * @param FormEntriesFactory                       $formEntriesFactory
+     * @param FormEntriesInterfaceFactory              $dataFormEntriesFactory
+     * @param FormEntriesCollectionFactory             $formEntriesCollectionFactory
+     * @param FormEntriesSearchResultsInterfaceFactory $searchResultsFactory
+     * @param DataObjectHelper                         $dataObjectHelper
+     * @param DataObjectProcessor                      $dataObjectProcessor
+     * @param StoreManagerInterface                    $storeManager
+     */
+    public function __construct(
+        ResourceFormEntries $resource,
+        FormEntriesFactory $formEntriesFactory,
+        FormEntriesInterfaceFactory $dataFormEntriesFactory,
+        FormEntriesCollectionFactory $formEntriesCollectionFactory,
+        FormEntriesSearchResultsInterfaceFactory $searchResultsFactory,
+        DataObjectHelper $dataObjectHelper,
+        DataObjectProcessor $dataObjectProcessor,
+        StoreManagerInterface $storeManager
+    ) {
+
+        $this->resource = $resource;
+        $this->formEntriesFactory = $formEntriesFactory;
+        $this->formEntriesCollectionFactory = $formEntriesCollectionFactory;
+        $this->searchResultsFactory = $searchResultsFactory;
+        $this->dataObjectHelper = $dataObjectHelper;
+        $this->dataFormEntriesFactory = $dataFormEntriesFactory;
+        $this->dataObjectProcessor = $dataObjectProcessor;
+        $this->storeManager = $storeManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save(
+        \Licentia\Forms\Api\Data\FormEntriesInterface $formEntries
+    ) {
+
+        /* if (empty($formEntries->getStoreId())) {
+            $storeId = $this->storeManager->getStore()->getId();
+            $formEntries->setStoreId($storeId);
+        } */
+        try {
+            $this->resource->save($formEntries);
+        } catch (\Exception $exception) {
+            throw new CouldNotSaveException(
+                __(
+                    'Could not save the formEntries: %1',
+                    $exception->getMessage()
+                )
+            );
+        }
+
+        return $formEntries;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getById($formEntriesId)
+    {
+
+        $formEntries = $this->formEntriesFactory->create();
+        $formEntries->load($formEntriesId);
+        if (!$formEntries->getId()) {
+            throw new NoSuchEntityException(__('FormEntries with id "%1" does not exist.', $formEntriesId));
+        }
+
+        return $formEntries;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getByIdDisplay($formentriesId)
+    {
+
+        return $this->getById($formentriesId)->getEntryToDisplay();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getListByCode(string $code, $storeId = null)
+    {
+
+        return $this->formEntriesFactory->create()->getListByCode($code, $storeId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getList(
+        \Magento\Framework\Api\SearchCriteriaInterface $criteria
+    ) {
+
+        $searchResults = $this->searchResultsFactory->create();
+        $searchResults->setSearchCriteria($criteria);
+
+        $collection = $this->formEntriesCollectionFactory->create();
+        foreach ($criteria->getFilterGroups() as $filterGroup) {
+            foreach ($filterGroup->getFilters() as $filter) {
+                $condition = $filter->getConditionType() ?: 'eq';
+                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
+            }
+        }
+        $searchResults->setTotalCount($collection->getSize());
+        $sortOrders = $criteria->getSortOrders();
+        if ($sortOrders) {
+            /** @var SortOrder $sortOrder */
+            foreach ($sortOrders as $sortOrder) {
+                $collection->addOrder(
+                    $sortOrder->getField(),
+                    ($sortOrder->getDirection() == SortOrder::SORT_ASC) ? 'ASC' : 'DESC'
+                );
+            }
+        }
+        $collection->setCurPage($criteria->getCurrentPage());
+        $collection->setPageSize($criteria->getPageSize());
+        $items = [];
+
+        foreach ($collection as $formEntriesModel) {
+            $formEntriesData = $this->dataFormEntriesFactory->create();
+            $this->dataObjectHelper->populateWithArray(
+                $formEntriesData,
+                $formEntriesModel->getData(),
+                \Licentia\Forms\Api\Data\FormEntriesInterface::class
+            );
+            $items[] = $this->dataObjectProcessor->buildOutputDataArray(
+                $formEntriesData,
+                \Licentia\Forms\Api\Data\FormEntriesInterface::class
+            );
+        }
+        $searchResults->setItems($items);
+
+        return $searchResults;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(
+        \Licentia\Forms\Api\Data\FormEntriesInterface $formEntries
+    ) {
+
+        try {
+            $this->resource->delete($formEntries);
+        } catch (\Exception $exception) {
+            throw new CouldNotDeleteException(
+                __(
+                    'Could not delete the FormEntries: %1',
+                    $exception->getMessage()
+                )
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteById($formEntriesId)
+    {
+
+        return $this->delete($this->getById($formEntriesId));
+    }
+}

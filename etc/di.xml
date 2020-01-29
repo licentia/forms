@@ -1,0 +1,72 @@
+<?xml version="1.0"?><!--
+  ~ Copyright (C) 2020 Licentia, Unipessoal LDA
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  ~
+  ~ @title      Licentia Panda - Magento® Sales Automation Extension
+  ~ @package    Licentia
+  ~ @author     Bento Vilas Boas <bento@licentia.pt>
+  ~ @copyright  Copyright (c) Licentia - https://licentia.pt
+  ~ @license    GNU General Public License V3
+  ~ @modified   29/01/20, 15:22 GMT
+  ~
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+
+    <preference for="Licentia\Forms\Api\FormsRepositoryInterface" type="Licentia\Forms\Model\FormsRepository"/>
+    <preference for="Licentia\Forms\Api\Data\FormsInterface" type="Licentia\Forms\Model\Forms"/>
+    <preference for="Licentia\Forms\Api\Data\FormsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Licentia\Forms\Api\FormEntriesRepositoryInterface" type="Licentia\Forms\Model\FormEntriesRepository"/>
+    <preference for="Licentia\Forms\Api\Data\FormEntriesInterface" type="Licentia\Forms\Model\FormEntries"/>
+    <preference for="Licentia\Forms\Api\Data\FormEntriesSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Licentia\Forms\Api\FormElementsRepositoryInterface" type="Licentia\Forms\Model\FormElementsRepository"/>
+    <preference for="Licentia\Forms\Api\Data\FormElementsInterface" type="Licentia\Forms\Model\FormElements"/>
+    <preference for="Licentia\Forms\Api\Data\FormElementsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="panda_forms_listing_data_source" xsi:type="string">Licentia\Forms\Model\ResourceModel\Forms\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Licentia\Forms\Model\ResourceModel\Forms\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">panda_forms</argument>
+            <argument name="eventPrefix" xsi:type="string">panda_forms_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">panda_forms_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Licentia\Forms\Model\ResourceModel\Forms</argument>
+        </arguments>
+    </type>
+    <virtualType name="pandaFormsGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="pandaFormsGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Licentia\Forms\Model\ResourceModel\Forms\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">pandaFormsGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+</config>
