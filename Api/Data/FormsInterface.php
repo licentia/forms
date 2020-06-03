@@ -20,7 +20,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -164,7 +164,7 @@ interface FormsInterface
      *
      * @param string $form_id
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setFormId($form_id);
@@ -182,7 +182,7 @@ interface FormsInterface
      *
      * @param string $name
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setName($name);
@@ -200,7 +200,7 @@ interface FormsInterface
      *
      * @param string $title
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setTitle($title);
@@ -218,7 +218,7 @@ interface FormsInterface
      *
      * @param string $description
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setDescription($description);
@@ -236,7 +236,7 @@ interface FormsInterface
      *
      * @param string $active
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setActive($active);
@@ -254,7 +254,7 @@ interface FormsInterface
      *
      * @param string $can_edit
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setCanEdit($can_edit);
@@ -272,7 +272,7 @@ interface FormsInterface
      *
      * @param string $from_date
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setFromDate($from_date);
@@ -290,7 +290,7 @@ interface FormsInterface
      *
      * @param string $to_date
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setToDate($to_date);
@@ -308,7 +308,7 @@ interface FormsInterface
      *
      * @param string $registered_only
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setRegisteredOnly($registered_only);
@@ -326,7 +326,7 @@ interface FormsInterface
      *
      * @param string $entries
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setEntries($entries);
@@ -344,7 +344,7 @@ interface FormsInterface
      *
      * @param string $subscribers
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setSubscribers($subscribers);
@@ -362,7 +362,7 @@ interface FormsInterface
      *
      * @param string $max_entries
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setMaxEntries($max_entries);
@@ -380,7 +380,7 @@ interface FormsInterface
      *
      * @param string $submit_label
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setSubmitLabel($submit_label);
@@ -398,7 +398,7 @@ interface FormsInterface
      *
      * @param string $update_label
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setUpdateLabel($update_label);
@@ -416,7 +416,7 @@ interface FormsInterface
      *
      * @param string $css_class
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setCssClass($css_class);
@@ -434,7 +434,7 @@ interface FormsInterface
      *
      * @param string $success_page
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setSuccessPage($success_page);
@@ -452,7 +452,7 @@ interface FormsInterface
      *
      * @param string $success_message
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setSuccessMessage($success_message);
@@ -470,7 +470,7 @@ interface FormsInterface
      *
      * @param string $enable_template
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setEnableTemplate($enable_template);
@@ -488,7 +488,7 @@ interface FormsInterface
      *
      * @param string $template
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setTemplate($template);
@@ -506,7 +506,7 @@ interface FormsInterface
      *
      * @param string $subscription
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setManageSubscription($subscription);
@@ -524,7 +524,7 @@ interface FormsInterface
      *
      * @param string $entryType
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
 
     public function setEntryType($entryType);
@@ -541,7 +541,7 @@ interface FormsInterface
      *
      * @param string $code
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setCode($code);
 
@@ -557,7 +557,7 @@ interface FormsInterface
      *
      * @param string $emails
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setNotifications($emails);
 }

@@ -20,7 +20,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -257,7 +257,7 @@ interface FormElementsInterface
      *
      * @param string $element_id
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setElementId($element_id);
@@ -275,7 +275,7 @@ interface FormElementsInterface
      *
      * @param string $form_id
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setFormId($form_id);
@@ -293,7 +293,7 @@ interface FormElementsInterface
      *
      * @param string $name
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setName($name);
@@ -311,7 +311,7 @@ interface FormElementsInterface
      *
      * @param string $type
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setType($type);
@@ -329,7 +329,7 @@ interface FormElementsInterface
      *
      * @param string $stars
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setStars($stars);
@@ -347,7 +347,7 @@ interface FormElementsInterface
      *
      * @param string $required
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setRequired($required);
@@ -365,7 +365,7 @@ interface FormElementsInterface
      *
      * @param string $unique
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setUnique($unique);
@@ -383,7 +383,7 @@ interface FormElementsInterface
      *
      * @param string $default
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setDefault($default);
@@ -401,7 +401,7 @@ interface FormElementsInterface
      *
      * @param string $map
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMap($map);
@@ -418,7 +418,7 @@ interface FormElementsInterface
      *
      * @param $mapCustomer
      *
-     * @return  \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return  FormElementsInterface
      */
     public function setMapCustomer($mapCustomer);
 
@@ -435,7 +435,7 @@ interface FormElementsInterface
      *
      * @param string $placeholder
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setPlaceholder($placeholder);
@@ -453,7 +453,7 @@ interface FormElementsInterface
      *
      * @param string $css_class
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setCssClass($css_class);
@@ -471,7 +471,7 @@ interface FormElementsInterface
      *
      * @param string $sort_order
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setSortOrder($sort_order);
@@ -489,7 +489,7 @@ interface FormElementsInterface
      *
      * @param string $checked
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setChecked($checked);
@@ -507,7 +507,7 @@ interface FormElementsInterface
      *
      * @param string $disabled
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setDisabled($disabled);
@@ -525,7 +525,7 @@ interface FormElementsInterface
      *
      * @param string $hint
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setHint($hint);
@@ -543,7 +543,7 @@ interface FormElementsInterface
      *
      * @param string $entry_code
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setEntryCode($entry_code);
@@ -561,7 +561,7 @@ interface FormElementsInterface
      *
      * @param string $active
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setActive($active);
@@ -579,7 +579,7 @@ interface FormElementsInterface
      *
      * @param string $options
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setOptions($options);
@@ -597,7 +597,7 @@ interface FormElementsInterface
      *
      * @param string $pattern
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setPattern($pattern);
@@ -615,7 +615,7 @@ interface FormElementsInterface
      *
      * @param string $min_number
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMinNumber($min_number);
@@ -633,7 +633,7 @@ interface FormElementsInterface
      *
      * @param string $max_number
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMaxNumber($max_number);
@@ -651,7 +651,7 @@ interface FormElementsInterface
      *
      * @param string $max_length
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMaxLength($max_length);
@@ -669,7 +669,7 @@ interface FormElementsInterface
      *
      * @param string $min_length
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMinLength($min_length);
@@ -687,7 +687,7 @@ interface FormElementsInterface
      *
      * @param string $min_date
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMinDate($min_date);
@@ -705,7 +705,7 @@ interface FormElementsInterface
      *
      * @param string $max_date
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMaxDate($max_date);
@@ -723,7 +723,7 @@ interface FormElementsInterface
      *
      * @param string $html
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setHtml($html);
@@ -741,7 +741,7 @@ interface FormElementsInterface
      *
      * @param string $params
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setParams($params);
@@ -759,7 +759,7 @@ interface FormElementsInterface
      *
      * @param string $extensions
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setExtensions($extensions);
@@ -777,7 +777,7 @@ interface FormElementsInterface
      *
      * @param string $max_size
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setMaxSize($max_size);
@@ -795,7 +795,7 @@ interface FormElementsInterface
      *
      * @param string $email_validation
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setEmailValidation($email_validation);
@@ -813,7 +813,7 @@ interface FormElementsInterface
      *
      * @param string $link_expiration
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
 
     public function setLinkExpiration($link_expiration);
@@ -830,7 +830,7 @@ interface FormElementsInterface
      *
      * @param string $minWidth
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMinWidth($minWidth);
 
@@ -846,7 +846,7 @@ interface FormElementsInterface
      *
      * @param string $maxWidth
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMaxWidth($maxWidth);
 
@@ -862,7 +862,7 @@ interface FormElementsInterface
      *
      * @param string $minHeight
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMinHeight($minHeight);
 
@@ -878,7 +878,7 @@ interface FormElementsInterface
      *
      * @param string $maxHeight
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMaxHeight($maxHeight);
 
@@ -894,7 +894,7 @@ interface FormElementsInterface
      *
      * @param string $resize
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setResize($resize);
 
@@ -910,7 +910,7 @@ interface FormElementsInterface
      *
      * @param string $showInGrid
      *
-     * @return  \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return  FormElementsInterface
      */
     public function setShowInGrid($showInGrid);
 
@@ -926,7 +926,7 @@ interface FormElementsInterface
      *
      * @param string $showInFrontend
      *
-     * @return  \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return  FormElementsInterface
      */
     public function setShowInFrontend($showInFrontend);
 
@@ -942,7 +942,7 @@ interface FormElementsInterface
      *
      * @param string $code
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setCode($code);
 }

@@ -20,7 +20,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -37,7 +37,7 @@ interface FormElementsSearchResultsInterface extends \Magento\Framework\Api\Sear
     /**
      * Get FormElements list.
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface[]
+     * @return FormElementsInterface[]
      */
 
     public function getItems();
@@ -45,7 +45,7 @@ interface FormElementsSearchResultsInterface extends \Magento\Framework\Api\Sear
     /**
      * Set element_id list.
      *
-     * @param \Licentia\Forms\Api\Data\FormElementsInterface[] $items
+     * @param FormElementsInterface[] $items
      *
      * @return $this
      */

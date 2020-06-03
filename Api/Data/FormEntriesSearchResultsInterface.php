@@ -20,7 +20,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -37,7 +37,7 @@ interface FormEntriesSearchResultsInterface extends \Magento\Framework\Api\Searc
     /**
      * Get FormEntries list.
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface[]
+     * @return FormEntriesInterface[]
      */
 
     public function getItems();
@@ -45,7 +45,7 @@ interface FormEntriesSearchResultsInterface extends \Magento\Framework\Api\Searc
     /**
      * Set entry_id list.
      *
-     * @param \Licentia\Forms\Api\Data\FormEntriesInterface[] $items
+     * @param FormEntriesInterface[] $items
      *
      * @return $this
      */

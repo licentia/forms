@@ -20,7 +20,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -232,7 +232,7 @@ interface FormEntriesInterface
      *
      * @param string $entry_id
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setEntryId($entry_id);
@@ -250,7 +250,7 @@ interface FormEntriesInterface
      *
      * @param string $form_id
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setFormId($form_id);
@@ -268,7 +268,7 @@ interface FormEntriesInterface
      *
      * @param string $subscriber_id
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setSubscriberId($subscriber_id);
@@ -286,7 +286,7 @@ interface FormEntriesInterface
      *
      * @param string $customer_id
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setCustomerId($customer_id);
@@ -304,7 +304,7 @@ interface FormEntriesInterface
      *
      * @param string $created_at
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setCreatedAt($created_at);
@@ -322,7 +322,7 @@ interface FormEntriesInterface
      *
      * @param string $validated
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setValidated($validated);
@@ -340,7 +340,7 @@ interface FormEntriesInterface
      *
      * @param string $validation_code
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setValidationCode($validation_code);
@@ -358,7 +358,7 @@ interface FormEntriesInterface
      *
      * @param string $validation_expires_at
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setValidationExpiresAt($validation_expires_at);
@@ -376,7 +376,7 @@ interface FormEntriesInterface
      *
      * @param string $field1
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField1($field1);
@@ -394,7 +394,7 @@ interface FormEntriesInterface
      *
      * @param string $field2
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField2($field2);
@@ -412,7 +412,7 @@ interface FormEntriesInterface
      *
      * @param string $field3
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField3($field3);
@@ -430,7 +430,7 @@ interface FormEntriesInterface
      *
      * @param string $field4
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField4($field4);
@@ -448,7 +448,7 @@ interface FormEntriesInterface
      *
      * @param string $field5
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField5($field5);
@@ -466,7 +466,7 @@ interface FormEntriesInterface
      *
      * @param string $field6
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField6($field6);
@@ -484,7 +484,7 @@ interface FormEntriesInterface
      *
      * @param string $field7
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField7($field7);
@@ -502,7 +502,7 @@ interface FormEntriesInterface
      *
      * @param string $field8
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField8($field8);
@@ -520,7 +520,7 @@ interface FormEntriesInterface
      *
      * @param string $field9
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField9($field9);
@@ -538,7 +538,7 @@ interface FormEntriesInterface
      *
      * @param string $field10
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField10($field10);
@@ -556,7 +556,7 @@ interface FormEntriesInterface
      *
      * @param string $field11
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField11($field11);
@@ -574,7 +574,7 @@ interface FormEntriesInterface
      *
      * @param string $field12
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField12($field12);
@@ -592,7 +592,7 @@ interface FormEntriesInterface
      *
      * @param string $field13
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField13($field13);
@@ -610,7 +610,7 @@ interface FormEntriesInterface
      *
      * @param string $field14
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField14($field14);
@@ -628,7 +628,7 @@ interface FormEntriesInterface
      *
      * @param string $field15
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField15($field15);
@@ -646,7 +646,7 @@ interface FormEntriesInterface
      *
      * @param string $field16
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField16($field16);
@@ -664,7 +664,7 @@ interface FormEntriesInterface
      *
      * @param string $field17
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField17($field17);
@@ -682,7 +682,7 @@ interface FormEntriesInterface
      *
      * @param string $field18
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField18($field18);
@@ -700,7 +700,7 @@ interface FormEntriesInterface
      *
      * @param string $field19
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField19($field19);
@@ -718,7 +718,7 @@ interface FormEntriesInterface
      *
      * @param string $field20
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField20($field20);
@@ -736,7 +736,7 @@ interface FormEntriesInterface
      *
      * @param string $field21
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField21($field21);
@@ -754,7 +754,7 @@ interface FormEntriesInterface
      *
      * @param string $field22
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField22($field22);
@@ -772,7 +772,7 @@ interface FormEntriesInterface
      *
      * @param string $field23
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField23($field23);
@@ -790,7 +790,7 @@ interface FormEntriesInterface
      *
      * @param string $field24
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField24($field24);
@@ -808,7 +808,7 @@ interface FormEntriesInterface
      *
      * @param string $field25
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
 
     public function setField25($field25);

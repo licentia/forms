@@ -21,7 +21,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -62,7 +62,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
     protected function _construct()
     {
 
-        $this->_init(\Licentia\Forms\Model\ResourceModel\FormElements::class);
+        $this->_init(ResourceModel\FormElements::class);
     }
 
     /**
@@ -71,7 +71,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
     public function getIdAttribute()
     {
 
-        return \Licentia\Forms\Model\Forms::FIELD_IDENTIFIER . $this->getData('entry_code');
+        return Forms::FIELD_IDENTIFIER . $this->getData('entry_code');
     }
 
     /**
@@ -867,7 +867,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $html
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setHtml($html)
     {
@@ -891,7 +891,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $params
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setParams($params)
     {
@@ -915,7 +915,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $extensions
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setExtensions($extensions)
     {
@@ -939,7 +939,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $max_size
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMaxSize($max_size)
     {
@@ -963,7 +963,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $email_validation
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setEmailValidation($email_validation)
     {
@@ -987,7 +987,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $link_expiration
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setLinkExpiration($link_expiration)
     {
@@ -1011,7 +1011,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $minWidth
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMinWidth($minWidth)
     {
@@ -1035,7 +1035,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $maxWidth
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMaxWidth($maxWidth)
     {
@@ -1059,7 +1059,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $minHeight
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMinHeight($minHeight)
     {
@@ -1083,7 +1083,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $maxHeight
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setMaxHeight($maxHeight)
     {
@@ -1107,7 +1107,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $resize
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setResize($resize)
     {
@@ -1131,7 +1131,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @param string $code
      *
-     * @return \Licentia\Forms\Api\Data\FormElementsInterface
+     * @return FormElementsInterface
      */
     public function setCode($code)
     {

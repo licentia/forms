@@ -21,7 +21,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -265,7 +265,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     protected function _construct()
     {
 
-        $this->_init(\Licentia\Forms\Model\ResourceModel\FormEntries::class);
+        $this->_init(ResourceModel\FormEntries::class);
     }
 
     /**
@@ -386,7 +386,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @param FormEntries $entry
      */
-    public function notifyNewFormEntry(\Licentia\Forms\Model\FormEntries $entry)
+    public function notifyNewFormEntry(FormEntries $entry)
     {
 
         if (!$this->getForm()->isFrontend()) {
@@ -451,7 +451,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
                 $transport->sendMessage();
             } catch (\Exception $e) {
-                $this->_logger->warning($e->getMessage());
+                $this->pandaHelper->logWarning($e);
             }
         }
     }
@@ -565,7 +565,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
             $transport->sendMessage();
         } catch (\Exception $e) {
-            $this->_logger->error($e->getMessage());
+            $this->pandaHelper->logException($e);
         }
 
         return parent::afterSave();
@@ -642,7 +642,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
         }
 
         $deleteFiles = [];
-        /** @var \Licentia\Forms\Model\FormElements $element */
+        /** @var FormElements $element */
         foreach ($elements as $element) {
             $field = Forms::FIELD_IDENTIFIER . $element->getEntryCode();
 
@@ -908,7 +908,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return bool
      */
-    public function validateElement(\Licentia\Forms\Model\FormElements $element, $value)
+    public function validateElement(FormElements $element, $value)
     {
 
         $errors = false;
@@ -1148,7 +1148,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     public function getListByCode(string $formCode, $storeId = null)
     {
 
-        /** @var \Licentia\Forms\Model\Forms $form */
+        /** @var Forms $form */
         $form = $this->formsFactory->create()->load($formCode, 'code');
 
         if (!$form->getId()) {
@@ -1181,7 +1181,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     }
 
     /**
-     * @param \Licentia\Forms\Model\FormEntries $data
+     * @param FormEntries $data
      *
      * @return array
      */
@@ -1201,7 +1201,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
         }
 
         $entry = [];
-        /** @var \Licentia\Forms\Model\FormElements $element */
+        /** @var FormElements $element */
         foreach ($elements as $element) {
             $value = $this->getData('field_' . $element->getData('entry_code'));
 
@@ -1737,7 +1737,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field13
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField13($field13)
     {
@@ -1761,7 +1761,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field14
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField14($field14)
     {
@@ -1785,7 +1785,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field15
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField15($field15)
     {
@@ -1809,7 +1809,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field16
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField16($field16)
     {
@@ -1833,7 +1833,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field17
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField17($field17)
     {
@@ -1857,7 +1857,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field18
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField18($field18)
     {
@@ -1881,7 +1881,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field19
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField19($field19)
     {
@@ -1905,7 +1905,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field20
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField20($field20)
     {
@@ -1929,7 +1929,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field21
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField21($field21)
     {
@@ -1953,7 +1953,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field22
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField22($field22)
     {
@@ -1977,7 +1977,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field23
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField23($field23)
     {
@@ -2001,7 +2001,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field24
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField24($field24)
     {
@@ -2025,7 +2025,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @param string $field25
      *
-     * @return \Licentia\Forms\Api\Data\FormEntriesInterface
+     * @return FormEntriesInterface
      */
     public function setField25($field25)
     {

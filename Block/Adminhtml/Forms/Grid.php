@@ -21,7 +21,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -130,7 +130,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _prepareColumns()
     {
 
-        /** @var \Licentia\Forms\Model\Forms $form */
+        /** @var Forms $form */
         $form = $this->registry->registry('panda_form');
 
         $validation = false;
@@ -227,7 +227,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
             if ($element->getType() == 'country') {
                 $options['type'] = 'options';
-                $options['options'] = \Licentia\Forms\Model\Forms::getCountriesList();
+                $options['options'] = Forms::getCountriesList();
             }
 
             if ($element->getType() == 'number') {
@@ -285,7 +285,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getRowUrl($row)
     {
 
-        /** @var \Licentia\Forms\Model\Forms $form */
+        /** @var Forms $form */
         $form = $this->registry->registry('panda_form');
 
         if ($form->isFrontend()) {

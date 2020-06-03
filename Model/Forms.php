@@ -21,7 +21,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -158,7 +158,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
     protected function _construct()
     {
 
-        $this->_init(\Licentia\Forms\Model\ResourceModel\Forms::class);
+        $this->_init(ResourceModel\Forms::class);
     }
 
     /**
@@ -390,7 +390,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $form_id
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setFormId($form_id)
     {
@@ -414,7 +414,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $name
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setName($name)
     {
@@ -438,7 +438,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $title
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setTitle($title)
     {
@@ -462,7 +462,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $description
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setDescription($description)
     {
@@ -486,7 +486,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $active
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setActive($active)
     {
@@ -510,7 +510,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $can_edit
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setCanEdit($can_edit)
     {
@@ -534,7 +534,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $from_date
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setFromDate($from_date)
     {
@@ -558,7 +558,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $to_date
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setToDate($to_date)
     {
@@ -582,7 +582,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $registered_only
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setRegisteredOnly($registered_only)
     {
@@ -606,7 +606,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $entries
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setEntries($entries)
     {
@@ -630,7 +630,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $subscribers
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setSubscribers($subscribers)
     {
@@ -654,7 +654,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $max_entries
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setMaxEntries($max_entries)
     {
@@ -678,7 +678,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $submit_label
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setSubmitLabel($submit_label)
     {
@@ -702,7 +702,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $update_label
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setUpdateLabel($update_label)
     {
@@ -726,7 +726,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $css_class
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setCssClass($css_class)
     {
@@ -750,7 +750,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $success_page
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setSuccessPage($success_page)
     {
@@ -774,7 +774,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $success_message
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setSuccessMessage($success_message)
     {
@@ -798,7 +798,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $template
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setTemplate($template)
     {
@@ -822,7 +822,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $template
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setEnableTemplate($template)
     {
@@ -846,7 +846,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $subscription
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setManageSubscription($subscription)
     {
@@ -870,7 +870,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $entryType
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setEntryType($entryType)
     {
@@ -894,7 +894,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $code
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setCode($code)
     {
@@ -918,7 +918,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $emails
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setNotifications($emails)
     {
@@ -942,7 +942,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @param string $store_id
      *
-     * @return \Licentia\Forms\Api\Data\FormsInterface
+     * @return FormsInterface
      */
     public function setStoreId($store_id)
     {

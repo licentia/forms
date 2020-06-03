@@ -21,7 +21,7 @@
  * @author     Bento Vilas Boas <bento@licentia.pt>
  * @copyright  Copyright (c) Licentia - https://licentia.pt
  * @license    GNU General Public License V3
- * @modified   29/01/20, 15:22 GMT
+ * @modified   03/06/20, 16:18 GMT
  *
  */
 
@@ -104,7 +104,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
      */
     public function __construct(
         \Licentia\Panda\Helper\Data $pandaHelper,
-        \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor,
+        DataPersistorInterface $dataPersistor,
         \Magento\Captcha\Block\Captcha $captcha,
         \Magento\Framework\View\Element\Template\Context $context,
         \Licentia\Forms\Model\FormElementsFactory $formElementsFactory,
