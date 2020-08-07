@@ -139,7 +139,7 @@ class Save extends \Licentia\Forms\Controller\Adminhtml\Forms
                 $this->messageManager->addSuccessMessage(__('You saved the Form.'));
                 $this->_getSession()->setFormData(false);
 
-                if ($this->getRequest()->getParam('back') || !$this->getRequest()->getParam('active')) {
+                if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath(
                         '*/*/edit',
                         [

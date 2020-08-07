@@ -107,7 +107,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $this->buttonList->remove('save');
             $this->getToolbar()
                  ->addChild(
-                     'save-split-button-',
+                     'save-split-button',
                      'Magento\Backend\Block\Widget\Button\SplitButton',
                      [
                          'id'           => 'save-split-button',
@@ -149,7 +149,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $this->buttonList->remove('save');
             $this->getToolbar()
                  ->addChild(
-                     'save-split-button-',
+                     'save-split-button',
                      'Magento\Backend\Block\Widget\Button\SplitButton',
                      [
                          'id'           => 'save-split-button',
