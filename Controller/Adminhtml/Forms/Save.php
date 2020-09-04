@@ -144,7 +144,7 @@ class Save extends \Licentia\Forms\Controller\Adminhtml\Forms
                         '*/*/edit',
                         [
                             'id'     => $model->getId(),
-                            'tab_id' => $this->getRequest()->getParam('active_tab'),
+                            'active_tab' => $this->getRequest()->getParam('active_tab'),
                         ]
                     );
                 }
@@ -164,7 +164,7 @@ class Save extends \Licentia\Forms\Controller\Adminhtml\Forms
                 '*/*/edit',
                 [
                     'id'     => $model->getId(),
-                    'tab_id' => $this->getRequest()->getParam('active_tab'),
+                    'active_tab' => $this->getRequest()->getParam('active_tab'),
                 ]
             );
         }

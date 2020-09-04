@@ -190,14 +190,14 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 '*/*/delete',
                 [
                     'eid'    => $this->getRequest()->getParam('eid'),
-                    'tab_id' => 'element_section',
+                    'active_tab' => 'element_section',
                 ]
             );
             $locationReturn = $this->getUrl(
                 '*/*/edit',
                 [
                     'id'     => $this->getRequest()->getParam('id'),
-                    'tab_id' => 'element_section',
+                    'active_tab' => 'element_section',
                 ]
             );
 

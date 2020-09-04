@@ -143,7 +143,7 @@ class SaveElement extends \Licentia\Forms\Controller\Adminhtml\Forms
                         [
                             'id'     => $id,
                             'eid'    => $model->getId(),
-                            'tab_id' => 'element_section',
+                            'active_tab' => 'element_section',
                         ]
                     );
                 }
@@ -152,7 +152,7 @@ class SaveElement extends \Licentia\Forms\Controller\Adminhtml\Forms
                     '*/*/edit',
                     [
                         'id'     => $id,
-                        'tab_id' => 'element_section',
+                        'active_tab' => 'element_section',
                     ]
                 );
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
@@ -173,7 +173,7 @@ class SaveElement extends \Licentia\Forms\Controller\Adminhtml\Forms
                 [
                     'id'     => $id,
                     'eid'    => $this->getRequest()->getParam('eid'),
-                    'tab_id' => 'element_section',
+                    'active_tab' => 'element_section',
                 ]
             );
         }
@@ -182,7 +182,7 @@ class SaveElement extends \Licentia\Forms\Controller\Adminhtml\Forms
             '*/*/edit',
             [
                 'id'     => $id,
-                'tab_id' => 'element_section',
+                'active_tab' => 'element_section',
             ]
         );
     }

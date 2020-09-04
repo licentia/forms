@@ -98,7 +98,7 @@ class FormsActions extends Column
                                 static::URL_PATH_EDIT,
                                 [
                                     'id'     => $item['form_id'],
-                                    'tab_id' => 'element_section',
+                                    'active_tab' => 'element_section',
                                 ]
                             ),
                             'label' => __('View Elements'),
