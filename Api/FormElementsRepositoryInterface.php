@@ -54,14 +54,14 @@ interface FormElementsRepositoryInterface
     /**
      * Retrieve FormElements matching the specified criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchSearchCriteria
      *
      * @return \Licentia\Forms\Api\Data\FormElementsSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
 
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+        \Magento\Framework\Api\SearchCriteriaInterface $searchSearchCriteria
     );
 
     /**

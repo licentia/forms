@@ -31,13 +31,14 @@ class FormEntries extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * @var string
      */
-    protected $_idFieldName = 'entry_id';
+    protected string $_idFieldName = 'entry_id';
 
     /**
      * Initialize resource model
      * Get tablename from config
      *
      * @return void
+     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {

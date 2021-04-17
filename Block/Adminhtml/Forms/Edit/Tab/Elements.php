@@ -31,14 +31,14 @@ class Elements extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @var \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory
      */
-    protected $collectionFactory;
+    protected \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory $collectionFactory;
 
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
-    protected $registry = null;
+    protected ?\Magento\Framework\Registry $registry;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -68,6 +68,7 @@ class Elements extends \Magento\Backend\Block\Widget\Grid\Extended
         parent::__construct($context, $backendHelper, $data);
     }
 
+    /** @noinspection MagicMethodsValidityInspection */
     public function _construct()
     {
 
@@ -230,13 +231,13 @@ class Elements extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param \Magento\Catalog\Model\Product|\Magento\Framework\DataObject $row
+     * @param \Magento\Catalog\Model\Product|\Magento\Framework\DataObject $item
      *
-     * @return bool
+     * @return string
      */
-    public function getRowUrl($row)
+    public function getRowUrl($item)
     {
 
-        return $this->getUrl('*/*/edit', ['eid' => $row->getId(), 'id' => $row->getFormId()]);
+        return $this->getUrl('*/*/edit', ['eid' => $item->getId(), 'id' => $item->getFormId()]);
     }
 }

@@ -30,122 +30,122 @@ interface FormsInterface
     /**
      *
      */
-    const ENABLE_TEMPLATE = 'enable_template';
+    public const ENABLE_TEMPLATE = 'enable_template';
 
     /**
      *
      */
-    const MANAGE_SUBSCRIPTION = 'manage_subscription';
+    public const MANAGE_SUBSCRIPTION = 'manage_subscription';
 
     /**
      *
      */
-    const ENTRY_TYPE = 'entry_type';
+    public const ENTRY_TYPE = 'entry_type';
 
     /**
      *
      */
-    const CODE = 'code';
+    public const CODE = 'code';
 
     /**
      *
      */
-    const NOTIFICATIONS = 'notifications';
+    public const NOTIFICATIONS = 'notifications';
 
     /**
      *
      */
-    const TEMPLATE = 'template';
+    public const TEMPLATE = 'template';
 
     /**
      *
      */
-    const CAN_EDIT = 'can_edit';
+    public const CAN_EDIT = 'can_edit';
 
     /**
      *
      */
-    const TO_DATE = 'to_date';
+    public const TO_DATE = 'to_date';
 
     /**
      *
      */
-    const MAX_ENTRIES = 'max_entries';
+    public const MAX_ENTRIES = 'max_entries';
 
     /**
      *
      */
-    const ACTIVE = 'is_active';
+    public const ACTIVE = 'is_active';
 
     /**
      *
      */
-    const REGISTERED_ONLY = 'registered_only';
+    public const REGISTERED_ONLY = 'registered_only';
 
     /**
      *
      */
-    const TITLE = 'title';
+    public const TITLE = 'title';
 
     /**
      *
      */
-    const STORE_ID = 'store_id';
+    public const STORE_ID = 'store_id';
 
     /**
      *
      */
-    const SUCCESS_PAGE = 'success_page';
+    public const SUCCESS_PAGE = 'success_page';
 
     /**
      *
      */
-    const NAME = 'name';
+    public const NAME = 'name';
 
     /**
      *
      */
-    const DESCRIPTION = 'description';
+    public const DESCRIPTION = 'description';
 
     /**
      *
      */
-    const ENTRIES = 'entries';
+    public const ENTRIES = 'entries';
 
     /**
      *
      */
-    const FROM_DATE = 'from_date';
+    public const FROM_DATE = 'from_date';
 
     /**
      *
      */
-    const SUBMIT_LABEL = 'submit_label';
+    public const SUBMIT_LABEL = 'submit_label';
 
     /**
      *
      */
-    const UPDATE_LABEL = 'update_label';
+    public const UPDATE_LABEL = 'update_label';
 
     /**
      *
      */
-    const FORM_ID = 'form_id';
+    public const FORM_ID = 'form_id';
 
     /**
      *
      */
-    const SUBSCRIBERS = 'subscribers';
+    public const SUBSCRIBERS = 'subscribers';
 
     /**
      *
      */
-    const SUCCESS_MESSAGE = 'success_message';
+    public const SUCCESS_MESSAGE = 'success_message';
 
     /**
      *
      */
-    const CSS_CLASS = 'css_class';
+    public const CSS_CLASS = 'css_class';
 
     /**
      * @return string

@@ -43,7 +43,7 @@ class FormEntriesRepository implements FormEntriesRepositoryInterface
     /**
      * @var DataObjectHelper
      */
-    protected $dataObjectHelper;
+    protected DataObjectHelper $dataObjectHelper;
 
     /**
      * @var
@@ -58,37 +58,32 @@ class FormEntriesRepository implements FormEntriesRepositoryInterface
     /**
      * @var FormEntriesSearchResultsInterfaceFactory
      */
-    protected $searchResultsFactory;
+    protected FormEntriesSearchResultsInterfaceFactory $searchResultsFactory;
 
     /**
      * @var FormEntriesInterfaceFactory
      */
-    protected $dataFormEntriesFactory;
+    protected FormEntriesInterfaceFactory $dataFormEntriesFactory;
 
     /**
      * @var FormEntriesFactory
      */
-    protected $formEntriesFactory;
+    protected FormEntriesFactory $formEntriesFactory;
 
     /**
      * @var FormEntriesCollectionFactory
      */
-    protected $formEntriesCollectionFactory;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
+    protected FormEntriesCollectionFactory $formEntriesCollectionFactory;
 
     /**
      * @var ResourceFormEntries
      */
-    protected $resource;
+    protected ResourceFormEntries $resource;
 
     /**
      * @var DataObjectProcessor
      */
-    protected $dataObjectProcessor;
+    protected DataObjectProcessor $dataObjectProcessor;
 
     /**
      * @param ResourceFormEntries                      $resource
@@ -118,7 +113,6 @@ class FormEntriesRepository implements FormEntriesRepositoryInterface
         $this->dataObjectHelper = $dataObjectHelper;
         $this->dataFormEntriesFactory = $dataFormEntriesFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -199,7 +193,6 @@ class FormEntriesRepository implements FormEntriesRepositoryInterface
         $searchResults->setTotalCount($collection->getSize());
         $sortOrders = $criteria->getSortOrders();
         if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
             foreach ($sortOrders as $sortOrder) {
                 $collection->addOrder(
                     $sortOrder->getField(),

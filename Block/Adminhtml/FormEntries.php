@@ -30,7 +30,7 @@ class FormEntries extends \Magento\Backend\Block\Widget\Grid\Container
     /**
      * @var \Magento\Framework\Registry
      */
-    protected $registry;
+    protected \Magento\Framework\Registry $registry;
 
     /**
      * FormEntries constructor.
@@ -52,6 +52,7 @@ class FormEntries extends \Magento\Backend\Block\Widget\Grid\Container
 
     /**
      *
+     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {

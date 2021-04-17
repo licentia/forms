@@ -33,12 +33,12 @@ class SaveElement extends \Licentia\Forms\Controller\Adminhtml\Forms
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $scopeConfig;
+    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\Filter\Date
      */
-    protected $dateFilter;
+    protected \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter;
 
     /**
      * @param Action\Context                                     $context
@@ -155,9 +155,7 @@ class SaveElement extends \Licentia\Forms\Controller\Adminhtml\Forms
                         'active_tab' => 'element_section',
                     ]
                 );
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage(

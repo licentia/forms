@@ -31,12 +31,12 @@ class Columns extends \Magento\Ui\Component\Listing\Columns
     /**
      * Default columns max order
      */
-    const DEFAULT_COLUMNS_MAX_ORDER = 100;
+    public const DEFAULT_COLUMNS_MAX_ORDER = 100;
 
     /**
      * @var array
      */
-    protected $filterMap = [
+    protected array $filterMap = [
         'default' => 'text',
         'date'    => 'dateRange',
     ];
@@ -44,12 +44,12 @@ class Columns extends \Magento\Ui\Component\Listing\Columns
     /**
      * @var \Licentia\Forms\Ui\Component\ColumnFactory
      */
-    protected $columnFactory;
+    protected \Licentia\Forms\Ui\Component\ColumnFactory $columnFactory;
 
     /**
      * @var \Licentia\Panda\Model\ResourceModel\ExtraFields\CollectionFactory
      */
-    protected $extraFieldsCollection;
+    protected \Licentia\Panda\Model\ResourceModel\ExtraFields\CollectionFactory $extraFieldsCollection;
 
     /**
      * Columns constructor.
@@ -105,6 +105,6 @@ class Columns extends \Magento\Ui\Component\Listing\Columns
     protected function getFilterType($frontendInput)
     {
 
-        return isset($this->filterMap[$frontendInput]) ? $this->filterMap[$frontendInput] : $this->filterMap['default'];
+        return $this->filterMap[$frontendInput] ?? $this->filterMap['default'];
     }
 }

@@ -48,7 +48,7 @@ class FormsRepository implements FormsRepositoryInterface
     /**
      * @var DataObjectHelper
      */
-    protected $dataObjectHelper;
+    protected DataObjectHelper $dataObjectHelper;
 
     /**
      * @var
@@ -58,37 +58,32 @@ class FormsRepository implements FormsRepositoryInterface
     /**
      * @var FormsSearchResultsInterfaceFactory
      */
-    protected $searchResultsFactory;
+    protected FormsSearchResultsInterfaceFactory $searchResultsFactory;
 
     /**
      * @var FormsFactory
      */
-    protected $formsFactory;
+    protected FormsFactory $formsFactory;
 
     /**
      * @var FormsCollectionFactory
      */
-    protected $formsCollectionFactory;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
+    protected FormsCollectionFactory $formsCollectionFactory;
 
     /**
      * @var ResourceForms
      */
-    protected $resource;
+    protected ResourceForms $resource;
 
     /**
      * @var DataObjectProcessor
      */
-    protected $dataObjectProcessor;
+    protected DataObjectProcessor $dataObjectProcessor;
 
     /**
      * @var FormsInterfaceFactory
      */
-    protected $dataFormsFactory;
+    protected FormsInterfaceFactory $dataFormsFactory;
 
     /**
      * @param ResourceForms                      $resource
@@ -98,7 +93,6 @@ class FormsRepository implements FormsRepositoryInterface
      * @param FormsSearchResultsInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper                   $dataObjectHelper
      * @param DataObjectProcessor                $dataObjectProcessor
-     * @param StoreManagerInterface              $storeManager
      */
     public function __construct(
         ResourceForms $resource,
@@ -118,7 +112,6 @@ class FormsRepository implements FormsRepositoryInterface
         $this->dataObjectHelper = $dataObjectHelper;
         $this->dataFormsFactory = $dataFormsFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -181,7 +174,6 @@ class FormsRepository implements FormsRepositoryInterface
         $searchResults->setTotalCount($collection->getSize());
         $sortOrders = $criteria->getSortOrders();
         if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
             foreach ($sortOrders as $sortOrder) {
                 $collection->addOrder(
                     $sortOrder->getField(),

@@ -20,6 +20,8 @@
 
 namespace Licentia\Forms\Controller\Adminhtml\Forms;
 
+use Licentia\Forms\Block\Adminhtml\Forms\Edit\Tabs;
+
 /**
  * Class Edit
  *
@@ -66,13 +68,11 @@ class Edit extends \Licentia\Forms\Controller\Adminhtml\Forms
             return $resultRedirect->setPath('*/*/');
         }
 
-        if ($id) {
-            if (!$model->getId()) {
-                $this->messageManager->addErrorMessage(__('This Form no longer exists.'));
-                $resultRedirect = $this->resultRedirectFactory->create();
+        if ($id && !$model->getId()) {
+            $this->messageManager->addErrorMessage(__('This Form no longer exists.'));
+            $resultRedirect = $this->resultRedirectFactory->create();
 
-                return $resultRedirect->setPath('*/*/');
-            }
+            return $resultRedirect->setPath('*/*/');
         }
 
         if (!$model->getStoreId()) {
@@ -98,11 +98,11 @@ class Edit extends \Licentia\Forms\Controller\Adminhtml\Forms
 
         $resultPage->addContent(
             $resultPage->getLayout()
-                       ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Edit')
+                       ->createBlock(\Licentia\Forms\Block\Adminhtml\Forms\Edit::class)
         )
                    ->addLeft(
                        $resultPage->getLayout()
-                                  ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Edit\Tabs')
+                                  ->createBlock(Tabs::class)
                    );
 
         return $resultPage;

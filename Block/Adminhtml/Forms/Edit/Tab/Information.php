@@ -36,17 +36,17 @@ class Information extends \Magento\Backend\Block\Widget\Form\Generic
     /**
      * @var \Magento\Store\Model\System\Store
      */
-    protected $systemStore;
+    protected \Magento\Store\Model\System\Store $systemStore;
 
     /**
      * @var \Licentia\Forms\Model\FormsFactory
      */
-    protected $formsFactory;
+    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
 
     /**
      * @var \Magento\Cms\Model\Wysiwyg\Config
      */
-    protected $wysiwygConfig;
+    protected \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig;
 
     /**
      * Main constructor.
@@ -95,7 +95,6 @@ class Information extends \Magento\Backend\Block\Widget\Form\Generic
             $manageFormAvailable = true;
         }
 
-        /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create(
             [
                 'data' => [
@@ -157,12 +156,12 @@ class Information extends \Magento\Backend\Block\Widget\Form\Generic
                 </script>
          ';
 
-        if ($current->getEntryType() == 'frontend') {
+        if ($current->getEntryType() === 'frontend') {
             $fieldset->addField(
                 'manage_subscription',
                 "select",
                 [
-                    "disabled" => $manageFormAvailable ? false : true,
+                    "disabled" => !$manageFormAvailable,
                     "label"    => __('Display in manage subscription page?'),
                     "onchange" => 'toggleControlsValidateType.run();',
                     "options"  => [
@@ -192,7 +191,7 @@ class Information extends \Magento\Backend\Block\Widget\Form\Generic
             }
         }
 
-        if ($current->getEntryType() == 'frontend') {
+        if ($current->getEntryType() === 'frontend') {
             $fieldset->addField(
                 'title',
                 'text',
@@ -218,7 +217,7 @@ class Information extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        if ($current->getEntryType() == 'frontend') {
+        if ($current->getEntryType() === 'frontend') {
             $fieldset->addField(
                 'submit_label',
                 'text',
@@ -305,7 +304,7 @@ class Information extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        if ($current->getEntryType() == 'frontend') {
+        if ($current->getEntryType() === 'frontend') {
             $html = '
                 <script type="text/javascript">
 

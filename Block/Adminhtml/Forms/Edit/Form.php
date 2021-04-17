@@ -37,7 +37,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $save = ($this->getRequest()->getParam('eid') || $this->getRequest()
                                                               ->getParam('element')) ? 'saveElement' : 'save';
 
-        /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create(
             [
                 'data' => [

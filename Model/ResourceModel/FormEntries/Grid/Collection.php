@@ -22,6 +22,7 @@ namespace Licentia\Forms\Model\ResourceModel\FormEntries\Grid;
 use Licentia\Forms\Model\ResourceModel\FormEntries\Collection as FormEntriesCollection;
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\Search\AggregationInterface;
+use Magento\Framework\View\Element\UiComponent\DataProvider\Document;
 
 /**
  * Class Collection
@@ -32,17 +33,17 @@ class Collection extends FormEntriesCollection implements SearchResultInterface
     /**
      * @var AggregationInterface
      */
-    protected $aggregations;
+    protected AggregationInterface $aggregations;
 
     /**
      * @var \Magento\Framework\Registry
      */
-    protected $registry;
+    protected \Magento\Framework\Registry $registry;
 
     /**
      * @param \Magento\Framework\Registry                                  $registry
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface    $entityFactory
-     * @param \Licentia\Panda\Helper\Data                                  $logger
+     * @param \Psr\Log\LoggerInterface                                     $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
      * @param \Magento\Framework\Event\ManagerInterface                    $eventManager
      * @param mixed|null                                                   $mainTable
@@ -50,7 +51,7 @@ class Collection extends FormEntriesCollection implements SearchResultInterface
      * @param mixed                                                        $eventObject
      * @param mixed                                                        $resourceModel
      * @param string                                                       $model
-     * @param \Magento\Framework\DB\Adapter\AdapterInterface               $connection
+     * @param \Magento\Framework\DB\Adapter\AdapterInterface|null          $connection
      * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null    $resource
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
@@ -66,7 +67,7 @@ class Collection extends FormEntriesCollection implements SearchResultInterface
         $eventPrefix,
         $eventObject,
         $resourceModel,
-        $model = '\Magento\Framework\View\Element\UiComponent\DataProvider\Document',
+        $model = Document::class,
         \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
@@ -99,7 +100,7 @@ class Collection extends FormEntriesCollection implements SearchResultInterface
     /**
      * @param AggregationInterface $aggregations
      *
-     * @return $this|void
+     * @return void
      */
     public function setAggregations($aggregations)
     {

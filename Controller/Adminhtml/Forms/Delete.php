@@ -58,9 +58,7 @@ class Delete extends \Licentia\Forms\Controller\Adminhtml\Forms
                 }
 
                 $this->messageManager->addSuccessMessage(__('You deleted the %1', $type));
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage(

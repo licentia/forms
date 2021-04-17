@@ -30,7 +30,6 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
-use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class FormElementsRepository
@@ -41,54 +40,49 @@ class FormElementsRepository implements FormElementsRepositoryInterface
 {
 
     /**
-     * @var
+     * @var FormElementsCollectionFactory
      */
-    protected $FormElementsCollectionFactory;
+    protected FormElementsCollectionFactory $FormElementsCollectionFactory;
 
     /**
      * @var DataObjectHelper
      */
-    protected $dataObjectHelper;
+    protected DataObjectHelper $dataObjectHelper;
 
     /**
      * @var FormElementsSearchResultsInterfaceFactory
      */
-    protected $searchResultsFactory;
+    protected FormElementsSearchResultsInterfaceFactory $searchResultsFactory;
 
     /**
      * @var FormElementsFactory
      */
-    protected $formElementsFactory;
+    protected FormElementsFactory $formElementsFactory;
 
     /**
      * @var FormElementsCollectionFactory
      */
-    protected $formElementsCollectionFactory;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
+    protected FormElementsCollectionFactory $formElementsCollectionFactory;
 
     /**
      * @var ResourceFormElements
      */
-    protected $resource;
+    protected ResourceFormElements $resource;
 
     /**
      * @var DataObjectProcessor
      */
-    protected $dataObjectProcessor;
+    protected DataObjectProcessor $dataObjectProcessor;
 
     /**
      * @var FormElementsInterfaceFactory
      */
-    protected $dataFormElementsFactory;
+    protected FormElementsInterfaceFactory $dataFormElementsFactory;
 
     /**
-     * @var
+     * @var FormElementsFactory
      */
-    protected $FormElementsFactory;
+    protected FormElementsFactory $FormElementsFactory;
 
     /**
      * @param ResourceFormElements                      $resource
@@ -98,7 +92,6 @@ class FormElementsRepository implements FormElementsRepositoryInterface
      * @param FormElementsSearchResultsInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper                          $dataObjectHelper
      * @param DataObjectProcessor                       $dataObjectProcessor
-     * @param StoreManagerInterface                     $storeManager
      */
     public function __construct(
         ResourceFormElements $resource,
@@ -107,8 +100,7 @@ class FormElementsRepository implements FormElementsRepositoryInterface
         FormElementsCollectionFactory $formElementsCollectionFactory,
         FormElementsSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
-        DataObjectProcessor $dataObjectProcessor,
-        StoreManagerInterface $storeManager
+        DataObjectProcessor $dataObjectProcessor
     ) {
 
         $this->resource = $resource;
@@ -118,7 +110,6 @@ class FormElementsRepository implements FormElementsRepositoryInterface
         $this->dataObjectHelper = $dataObjectHelper;
         $this->dataFormElementsFactory = $dataFormElementsFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -128,10 +119,6 @@ class FormElementsRepository implements FormElementsRepositoryInterface
         \Licentia\Forms\Api\Data\FormElementsInterface $formElements
     ) {
 
-        /* if (empty($formElements->getStoreId())) {
-            $storeId = $this->storeManager->getStore()->getId();
-            $formElements->setStoreId($storeId);
-        } */
         try {
             $this->resource->save($formElements);
         } catch (\Exception $exception) {
@@ -149,13 +136,13 @@ class FormElementsRepository implements FormElementsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getById($formElementsId)
+    public function getById($formelementsId)
     {
 
         $formElement = $this->formElementsFactory->create();
-        $formElement->load($formElementsId);
+        $formElement->load($formelementsId);
         if (!$formElement->getId()) {
-            throw new NoSuchEntityException(__('FormElements with id "%1" does not exist.', $formElementsId));
+            throw new NoSuchEntityException(__('FormElements with id "%1" does not exist.', $formelementsId));
         }
 
         return $formElement;
@@ -165,23 +152,22 @@ class FormElementsRepository implements FormElementsRepositoryInterface
      * {@inheritdoc}
      */
     public function getList(
-        \Magento\Framework\Api\SearchCriteriaInterface $criteria
+        \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
     ) {
 
         $searchResults = $this->searchResultsFactory->create();
-        $searchResults->setSearchCriteria($criteria);
+        $searchResults->setSearchCriteria($searchCriteria);
 
         $collection = $this->formElementsCollectionFactory->create();
-        foreach ($criteria->getFilterGroups() as $filterGroup) {
+        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
             foreach ($filterGroup->getFilters() as $filter) {
                 $condition = $filter->getConditionType() ?: 'eq';
                 $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
             }
         }
         $searchResults->setTotalCount($collection->getSize());
-        $sortOrders = $criteria->getSortOrders();
+        $sortOrders = $searchCriteria->getSortOrders();
         if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
             foreach ($sortOrders as $sortOrder) {
                 $collection->addOrder(
                     $sortOrder->getField(),
@@ -189,8 +175,8 @@ class FormElementsRepository implements FormElementsRepositoryInterface
                 );
             }
         }
-        $collection->setCurPage($criteria->getCurrentPage());
-        $collection->setPageSize($criteria->getPageSize());
+        $collection->setCurPage($searchCriteria->getCurrentPage());
+        $collection->setPageSize($searchCriteria->getPageSize());
         $items = [];
 
         foreach ($collection as $formElementsModel) {

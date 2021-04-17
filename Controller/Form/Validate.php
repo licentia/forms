@@ -30,17 +30,17 @@ class Validate extends \Magento\Framework\App\Action\Action
     /**
      * @var \Licentia\Forms\Model\FormEntriesFactory
      */
-    protected $formEntriesFactory;
+    protected \Licentia\Forms\Model\FormEntriesFactory $formEntriesFactory;
 
     /**
      * @var \Magento\Customer\Model\Session
      */
-    protected $customerSession;
+    protected \Magento\Customer\Model\Session $customerSession;
 
     /**
      * @var \Magento\Framework\Controller\Result\JsonFactory
      */
-    protected $resultJsonFactory;
+    protected \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory;
 
     /**
      * Validate constructor.
@@ -70,7 +70,6 @@ class Validate extends \Magento\Framework\App\Action\Action
     public function execute()
     {
 
-        /** @var \Magento\Framework\Controller\Result\Json $result */
         $result = $this->resultJsonFactory->create();
 
         $params = $this->getRequest()->getParams();
@@ -91,14 +90,14 @@ class Validate extends \Magento\Framework\App\Action\Action
 
         $formEntry = [];
 
-        if ($type == 'url') {
+        if ($type === 'url') {
             $formEntry = $this->formEntriesFactory->create()->validateUrl($fieldValue);
             if (!$formEntry) {
                 $formEntry = __('Invalid URL');
             }
         }
 
-        if ($type == 'phone') {
+        if ($type === 'phone') {
             $formEntry = $this->formEntriesFactory->create()->validatePhone($fieldValue);
             if (!$formEntry) {
                 $formEntry = __(
@@ -110,9 +109,8 @@ class Validate extends \Magento\Framework\App\Action\Action
             }
         }
 
-        if ($type == 'unique') {
+        if ($type === 'unique') {
 
-            /** @var \Licentia\Forms\Model\FormEntries $formEntry */
             $formEntry = $this->formEntriesFactory->create();
             $formEntry->setCustomerId($this->customerSession->getCustomerId());
 

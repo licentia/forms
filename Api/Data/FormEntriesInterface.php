@@ -30,187 +30,187 @@ interface FormEntriesInterface
     /**
      *
      */
-    const FIELD_12 = 'field_12';
+    public const FIELD_12 = 'field_12';
 
     /**
      *
      */
-    const FIELD_3 = 'field_3';
+    public const FIELD_3 = 'field_3';
 
     /**
      *
      */
-    const FIELD_7 = 'field_7';
+    public const FIELD_7 = 'field_7';
 
     /**
      *
      */
-    const VALIDATED = 'validated';
+    public const VALIDATED = 'validated';
 
     /**
      *
      */
-    const FIELD_5 = 'field_5';
+    public const FIELD_5 = 'field_5';
 
     /**
      *
      */
-    const FIELD_10 = 'field_10';
+    public const FIELD_10 = 'field_10';
 
     /**
      *
      */
-    const FIELD_1 = 'field_1';
+    public const FIELD_1 = 'field_1';
 
     /**
      *
      */
-    const FIELD_9 = 'field_9';
+    public const FIELD_9 = 'field_9';
 
     /**
      *
      */
-    const VALIDATION_CODE = 'validation_code';
+    public const VALIDATION_CODE = 'validation_code';
 
     /**
      *
      */
-    const FIELD_8 = 'field_8';
+    public const FIELD_8 = 'field_8';
 
     /**
      *
      */
-    const ENTRY_ID = 'entry_id';
+    public const ENTRY_ID = 'entry_id';
 
     /**
      *
      */
-    const CUSTOMER_ID = 'customer_id';
+    public const CUSTOMER_ID = 'customer_id';
 
     /**
      *
      */
-    const FIELD_2 = 'field_2';
+    public const FIELD_2 = 'field_2';
 
     /**
      *
      */
-    const FIELD_6 = 'field_6';
+    public const FIELD_6 = 'field_6';
 
     /**
      *
      */
-    const FORM_ID = 'form_id';
+    public const FORM_ID = 'form_id';
 
     /**
      *
      */
-    const FIELD_11 = 'field_11';
+    public const FIELD_11 = 'field_11';
 
     /**
      *
      */
-    const VALIDATION_EXPIRES_AT = 'validation_expires_at';
+    public const VALIDATION_EXPIRES_AT = 'validation_expires_at';
 
     /**
      *
      */
-    const SUBSCRIBER_ID = 'subscriber_id';
+    public const SUBSCRIBER_ID = 'subscriber_id';
 
     /**
      *
      */
-    const CREATED_AT = 'created_at';
+    public const CREATED_AT = 'created_at';
 
     /**
      *
      */
-    const FIELD_4 = 'field_4';
+    public const FIELD_4 = 'field_4';
 
     /**
      *
      */
-    const FIELD_13 = 'field_13';
+    public const FIELD_13 = 'field_13';
 
     /**
      *
      */
-    const FIELD_17 = 'field_17';
+    public const FIELD_17 = 'field_17';
 
     /**
      *
      */
-    const FIELD_23 = 'field_23';
+    public const FIELD_23 = 'field_23';
 
     /**
      *
      */
-    const FIELD_20 = 'field_20';
+    public const FIELD_20 = 'field_20';
 
     /**
      *
      */
-    const FIELD_25 = 'field_25';
+    public const FIELD_25 = 'field_25';
 
     /**
      *
      */
-    const FIELD_21 = 'field_21';
+    public const FIELD_21 = 'field_21';
 
     /**
      *
      */
-    const FIELD_18 = 'field_18';
+    public const FIELD_18 = 'field_18';
 
     /**
      *
      */
-    const FIELD_16 = 'field_16';
+    public const FIELD_16 = 'field_16';
 
     /**
      *
      */
-    const FIELD_22 = 'field_22';
+    public const FIELD_22 = 'field_22';
 
     /**
      *
      */
-    const FIELD_19 = 'field_19';
+    public const FIELD_19 = 'field_19';
 
     /**
      *
      */
-    const FIELD_15 = 'field_15';
+    public const FIELD_15 = 'field_15';
 
     /**
      *
      */
-    const FIELD_24 = 'field_24';
+    public const FIELD_24 = 'field_24';
 
     /**
      *
      */
-    const FIELD_14 = 'field_14';
+    public const FIELD_14 = 'field_14';
 
     /**
      *
      */
-    const LINK = 'link';
+    public const LINK = 'link';
 
     /**
      *
      */
-    const STORE_ID = 'store_id';
+    public const STORE_ID = 'store_id';
 
     /**
      *
      */
-    const EMAIL = 'email';
+    public const EMAIL = 'email';
 
     /**
      *
      */
-    const REQUIRED_EMAIL_VALIDATION = 'required_email_validation';
+    public const REQUIRED_EMAIL_VALIDATION = 'required_email_validation';
 
     /**
      * Get entry_id

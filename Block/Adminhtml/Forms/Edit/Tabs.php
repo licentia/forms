@@ -20,6 +20,11 @@
 
 namespace Licentia\Forms\Block\Adminhtml\Forms\Edit;
 
+use Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Edit;
+use Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Elements;
+use Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Template;
+use Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Information;
+
 /**
  * Class Tabs
  *
@@ -31,7 +36,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
     /**
      * @var \Magento\Framework\Registry
      */
-    protected $registry;
+    protected \Magento\Framework\Registry $registry;
 
     /**
      *
@@ -53,6 +58,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
         parent::__construct($context, $jsonEncoder, $authSession, $data);
     }
 
+    /** @noinspection MagicMethodsValidityInspection */
     protected function _construct()
     {
 
@@ -80,7 +86,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
                     'label'   => __('Information'),
                     'title'   => __('Information'),
                     'content' => $this->getLayout()
-                                      ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Information')
+                                      ->createBlock(Information::class)
                                       ->toHtml(),
                 ]
             );
@@ -92,7 +98,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
                         'label'   => __('Template'),
                         'title'   => __('Template'),
                         'content' => $this->getLayout()
-                                          ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Template')
+                                          ->createBlock(Template::class)
                                           ->toHtml(),
                     ]
                 );
@@ -106,7 +112,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
                     "label"   => __("Form Elements"),
                     "title"   => __("Form Elements"),
                     "content" => $this->getLayout()
-                                      ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Elements')
+                                      ->createBlock(Elements::class)
                                       ->toHtml(),
                 ]
             );
@@ -119,7 +125,7 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
                     "label"   => __("Form Element"),
                     "title"   => __("Form Element"),
                     "content" => $this->getLayout()
-                                      ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab\Edit')
+                                      ->createBlock(Edit::class)
                                       ->toHtml(),
                 ]
             );

@@ -19,6 +19,8 @@
 
 namespace Licentia\Forms\Block\Adminhtml\Forms;
 
+use Magento\Backend\Block\Widget\Button\SplitButton;
+
 /**
  * Class EditEntry
  *
@@ -30,14 +32,14 @@ class EditEntry extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * @var \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory
      */
-    protected $formElementsCollection;
+    protected \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory $formElementsCollection;
 
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
-    protected $registry = null;
+    protected ?\Magento\Framework\Registry $registry;
 
     /**
      * @param \Magento\Backend\Block\Widget\Context                              $context
@@ -58,6 +60,7 @@ class EditEntry extends \Magento\Backend\Block\Widget\Form\Container
         parent::__construct($context, $data);
     }
 
+    /** @noinspection MagicMethodsValidityInspection */
     protected function _construct()
     {
 
@@ -95,18 +98,18 @@ class EditEntry extends \Magento\Backend\Block\Widget\Form\Container
             ]
         );
 
-        $this->buttonList->update('back', 'onclick', "setLocation('{$locationReturn}')");
+        $this->buttonList->update('back', 'onclick', "setLocation('$locationReturn')");
         $this->buttonList->update('back', 'label', __('Back to Entries'));
 
         $this->buttonList->remove('save');
         $this->getToolbar()
              ->addChild(
                  'save-split-button',
-                 'Magento\Backend\Block\Widget\Button\SplitButton',
+                 SplitButton::class,
                  [
                      'id'           => 'save-split-button',
                      'label'        => __('Save'),
-                     'class_name'   => 'Magento\Backend\Block\Widget\Button\SplitButton',
+                     'class_name'   => SplitButton::class,
                      'button_class' => 'widget-button-update',
                      'options'      => [
                          [

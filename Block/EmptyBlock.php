@@ -26,6 +26,7 @@ namespace Licentia\Forms\Block;
 class EmptyBlock extends \Magento\Backend\Block\Template
 {
 
+    /** @noinspection MagicMethodsValidityInspection */
     public function _construct()
     {
 

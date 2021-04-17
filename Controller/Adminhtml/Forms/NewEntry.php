@@ -19,6 +19,9 @@
 
 namespace Licentia\Forms\Controller\Adminhtml\Forms;
 
+use Licentia\Forms\Block\Adminhtml\Forms\EditEntry;
+use Licentia\Forms\Block\Adminhtml\Forms\EditEntry\Tabs;
+
 /**
  * Class NewEntry
  *
@@ -57,7 +60,7 @@ class NewEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
         /** @var \Licentia\Forms\Model\Forms $model */
         $model = $this->registry->registry('panda_form');
 
-        if (count($model->getActiveElements()) == 0) {
+        if (count($model->getActiveElements()) === 0) {
             return $this->_redirect($this->_redirect->getRedirectUrl());
         }
 
@@ -68,11 +71,11 @@ class NewEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
 
         $resultPage->addContent(
             $resultPage->getLayout()
-                       ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\EditEntry')
+                       ->createBlock(EditEntry::class)
         )
                    ->addLeft(
                        $resultPage->getLayout()
-                                  ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\EditEntry\Tabs')
+                                  ->createBlock(Tabs::class)
                    );
 
         return $resultPage;

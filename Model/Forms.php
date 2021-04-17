@@ -34,17 +34,17 @@ class Forms extends \Magento\Framework\Model\AbstractModel
     /**
      *
      */
-    const FIELD_IDENTIFIER = 'panda_';
+    public const FIELD_IDENTIFIER = 'panda_';
 
     /**
      *
      */
-    const FORMS_MAX_NUMBER_FIELDS = 25;
+    public const FORMS_MAX_NUMBER_FIELDS = 25;
 
     /**
      *
      */
-    const ELEMENTS_TYPES = [
+    public const ELEMENTS_TYPES = [
         'captcha'    => 'CAPTCHA',
         'checkbox'   => 'Checkbox (One)',
         'checkboxes' => 'Checkboxes (Multiple)',
@@ -70,7 +70,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @var string
      */
-    protected $_eventPrefix = 'panda_forms';
+    protected string $_eventPrefix = 'panda_forms';
 
     /**
      * Parameter name in event
@@ -79,27 +79,27 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      *
      * @var string
      */
-    protected $_eventObject = 'forms';
+    protected string $_eventObject = 'forms';
 
     /**
      * @var \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory
      */
-    protected $elementsCollection;
+    protected ResourceModel\FormElements\CollectionFactory $elementsCollection;
 
     /**
      * @var \Magento\Directory\Api\CountryInformationAcquirerInterface
      */
-    protected static $countryInformationAcquirer;
+    protected static \Magento\Directory\Api\CountryInformationAcquirerInterface $countryInformationAcquirer;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\TimezoneInterface
      */
-    protected $timezone;
+    protected \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\Filter\Date
      */
-    protected $dateFilter;
+    protected \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -147,6 +147,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
      * Initialize resource model
      *
      * @return void
+     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {
@@ -341,7 +342,7 @@ class Forms extends \Magento\Framework\Model\AbstractModel
     public function isFrontend()
     {
 
-        return $this->getEntryType() == 'frontend' ? true : false;
+        return $this->getEntryType() === 'frontend';
     }
 
     /**

@@ -39,7 +39,6 @@ class ValidateEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
 
         $id = $this->getRequest()->getParam('id');
 
-        /** @var \Licentia\Forms\Model\FormEntries $model */
         $model = $this->formEntriesFactory->create()->load($id);
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
@@ -56,9 +55,7 @@ class ValidateEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
                     $model->setData('validated', 0)->save();
                     $this->messageManager->addSuccessMessage(__('Entry voided. Validation needed'));
                 }
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage(

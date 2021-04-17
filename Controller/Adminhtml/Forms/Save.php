@@ -33,17 +33,17 @@ class Save extends \Licentia\Forms\Controller\Adminhtml\Forms
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $scopeConfig;
+    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\Filter\Date
      */
-    protected $dateFilter;
+    protected \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\TimezoneInterface
      */
-    protected $timezone;
+    protected \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone;
 
     /**
      * @param Action\Context                                       $context
@@ -123,7 +123,7 @@ class Save extends \Licentia\Forms\Controller\Adminhtml\Forms
                 if (!isset($data['store_id'])) {
                     $data['store_id'] = [0];
                 }
-                if (array_search(0, $data['store_id']) !== false) {
+                if (array_search(0, $data['store_id'], true) !== false) {
                     $data['store_id'] = [];
                 }
                 $data['store_id'] = implode(',', $data['store_id']);
@@ -150,9 +150,7 @@ class Save extends \Licentia\Forms\Controller\Adminhtml\Forms
                 }
 
                 return $resultRedirect->setPath('*/*/');
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Form. '));
