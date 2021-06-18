@@ -33,46 +33,45 @@ class View extends \Licentia\Forms\Controller\Adminhtml\Forms
     /**
      * @var EncryptorInterface
      */
-    protected EncryptorInterface $encryptor;
+    protected $encryptor;
 
     /**
      * @var \Magento\Framework\Filesystem
      */
-    protected \Magento\Framework\Filesystem $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected \Magento\Store\Model\StoreManagerInterface $storeManager;
+    protected $storeManager;
 
     /**
      * @var \Magento\Framework\Controller\Result\RawFactory
      */
-    protected \Magento\Framework\Controller\Result\RawFactory $rawFactory;
+    protected $rawFactory;
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
+    protected $scopeConfig;
 
     /**
      * View constructor.
      *
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Framework\Controller\Result\RawFactory    $rawFactory
-     * @param \Magento\Store\Model\StoreManagerInterface         $storeManager
-     * @param \Magento\Framework\Filesystem                      $filesystem
-     * @param EncryptorInterface                                 $encryptor
-     * @param \Magento\Backend\App\Action\Context                $context
-     * @param \Magento\Framework\View\Result\PageFactory         $resultPageFactory
-     * @param \Magento\Framework\App\Response\Http\FileFactory   $fileFactory
-     * @param \Magento\Framework\Registry                        $registry
-     * @param \Licentia\Panda\Helper\Data                        $pandaHelper
-     * @param \Licentia\Forms\Model\FormsFactory                 $formsFactory
-     * @param \Licentia\Forms\Model\FormElementsFactory          $formElementsFactory
-     * @param \Licentia\Forms\Model\FormEntriesFactory           $formEntriesFactory
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory  $resultForwardFactory
-     * @param \Magento\Framework\View\Result\LayoutFactory       $resultLayoutFactory
+     * @param \Magento\Framework\Controller\Result\RawFactory   $rawFactory
+     * @param \Magento\Store\Model\StoreManagerInterface        $storeManager
+     * @param \Magento\Framework\Filesystem                     $filesystem
+     * @param EncryptorInterface                                $encryptor
+     * @param \Magento\Backend\App\Action\Context               $context
+     * @param \Magento\Framework\View\Result\PageFactory        $resultPageFactory
+     * @param \Magento\Framework\App\Response\Http\FileFactory  $fileFactory
+     * @param \Magento\Framework\Registry                       $registry
+     * @param \Licentia\Panda\Helper\Data                       $pandaHelper
+     * @param \Licentia\Forms\Model\FormsFactory                $formsFactory
+     * @param \Licentia\Forms\Model\FormElementsFactory         $formElementsFactory
+     * @param \Licentia\Forms\Model\FormEntriesFactory          $formEntriesFactory
+     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
+     * @param \Magento\Framework\View\Result\LayoutFactory      $resultLayoutFactory
      */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
@@ -129,6 +128,7 @@ class View extends \Licentia\Forms\Controller\Adminhtml\Forms
         $field = $this->getRequest()->getParam('field');
         $item = $this->getRequest()->getParam('item');
 
+        /** @var \Licentia\Forms\Model\FormEntries $model */
         $model = $this->formEntriesFactory->create()->load($id);
 
         /** @var \Licentia\Forms\Model\Forms $form */

@@ -33,12 +33,12 @@ class SaveEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
+    protected $scopeConfig;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\Filter\Date
      */
-    protected \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter;
+    protected $dateFilter;
 
     /**
      * @param Action\Context                                     $context
@@ -117,7 +117,7 @@ class SaveEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
                     $data['store_ids'] = [0];
                 }
 
-                if (array_search(0, $data['store_ids'], true) !== false) {
+                if (array_search(0, $data['store_ids']) !== false) {
                     $data['store_ids'] = [];
                 }
                 $data['store_ids'] = implode(',', $data['store_ids']);
@@ -147,7 +147,9 @@ class SaveEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
                         'id' => $id,
                     ]
                 );
-            } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            } catch (\RuntimeException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage($e,

@@ -30,212 +30,212 @@ interface FormElementsInterface
     /**
      *
      */
-    public const MAX_LENGTH = 'max_length';
+    const MAX_LENGTH = 'max_length';
 
     /**
      *
      */
-    public const MIN_LENGTH = 'min_length';
+    const MIN_LENGTH = 'min_length';
 
     /**
      *
      */
-    public const MAX_NUMBER = 'max_number';
+    const MAX_NUMBER = 'max_number';
 
     /**
      *
      */
-    public const MAX_DATE = 'max_date';
+    const MAX_DATE = 'max_date';
 
     /**
      *
      */
-    public const MIN_DATE = 'min_date';
+    const MIN_DATE = 'min_date';
 
     /**
      *
      */
-    public const REQUIRED = 'required';
+    const REQUIRED = 'required';
 
     /**
      *
      */
-    public const ENTRY_CODE = 'entry_code';
+    const ENTRY_CODE = 'entry_code';
 
     /**
      *
      */
-    public const ACTIVE = 'is_active';
+    const ACTIVE = 'is_active';
 
     /**
      *
      */
-    public const MAP = 'map';
+    const MAP = 'map';
 
     /**
      *
      */
-    public const MAP_CUSTOMER = 'map_customer';
+    const MAP_CUSTOMER = 'map_customer';
 
     /**
      *
      */
-    public const HTML = 'html';
+    const HTML = 'html';
 
     /**
      *
      */
-    public const PARAMS = 'params';
+    const PARAMS = 'params';
 
     /**
      *
      */
-    public const EXTENSIONS = 'extensions';
+    const EXTENSIONS = 'extensions';
 
     /**
      *
      */
-    public const MAX_SIZE = 'max_size';
+    const MAX_SIZE = 'max_size';
 
     /**
      *
      */
-    public const MIN_SIZE = 'min_size';
+    const MIN_SIZE = 'min_size';
 
     /**
      *
      */
-    public const RESIZE = 'resize';
+    const RESIZE = 'resize';
 
     /**
      *
      */
-    public const CODE = 'code';
+    const CODE = 'code';
 
     /**
      *
      */
-    public const MIN_WIDTH = 'min_width';
+    const MIN_WIDTH = 'min_width';
 
     /**
      *
      */
-    public const MAX_WIDTH = 'max_width';
+    const MAX_WIDTH = 'max_width';
 
     /**
      *
      */
-    public const MIN_HEIGHT = 'min_height';
+    const MIN_HEIGHT = 'min_height';
 
     /**
      *
      */
-    public const MAX_HEIGHT = 'max_height';
+    const MAX_HEIGHT = 'max_height';
 
     /**
      *
      */
-    public const EMAIL_VALIDATION = 'email_validation';
+    const EMAIL_VALIDATION = 'email_validation';
 
     /**
      *
      */
-    public const LINK_EXPIRATION = 'link_expiration';
+    const LINK_EXPIRATION = 'link_expiration';
 
     /**
      *
      */
-    public const DEFAULT_VALUE = 'default';
+    const DEFAULT_VALUE = 'default';
 
     /**
      *
      */
-    public const UNIQUE = 'unique';
+    const UNIQUE = 'unique';
 
     /**
      *
      */
-    public const PLACEHOLDER = 'placeholder';
+    const PLACEHOLDER = 'placeholder';
 
     /**
      *
      */
-    public const HINT = 'hint';
+    const HINT = 'hint';
 
     /**
      *
      */
-    public const ELEMENT_ID = 'element_id';
+    const ELEMENT_ID = 'element_id';
 
     /**
      *
      */
-    public const NAME = 'name';
+    const NAME = 'name';
 
     /**
      *
      */
-    public const SORT_ORDER = 'sort_order';
+    const SORT_ORDER = 'sort_order';
 
     /**
      *
      */
-    public const DISABLED = 'disabled';
+    const DISABLED = 'disabled';
 
     /**
      *
      */
-    public const OPTIONS = 'options';
+    const OPTIONS = 'options';
 
     /**
      *
      */
-    public const TYPE = 'type';
+    const TYPE = 'type';
 
     /**
      *
      */
-    public const ALLOW_MULTIPLE = 'allow_multiple';
+    const ALLOW_MULTIPLE = 'allow_multiple';
 
     /**
      *
      */
-    public const SHOW_IN_GRID = 'show_in_grid';
+    const SHOW_IN_GRID = 'show_in_grid';
 
     /**
      *
      */
-    public const SHOW_IN_FRONTEND = 'show_in_frontend';
+    const SHOW_IN_FRONTEND = 'show_in_frontend';
 
     /**
      *
      */
-    public const STARS = 'stars';
+    const STARS = 'stars';
 
     /**
      *
      */
-    public const PATTERN = 'pattern';
+    const PATTERN = 'pattern';
 
     /**
      *
      */
-    public const FORM_ID = 'form_id';
+    const FORM_ID = 'form_id';
 
     /**
      *
      */
-    public const CHECKED = 'checked';
+    const CHECKED = 'checked';
 
     /**
      *
      */
-    public const MIN_NUMBER = 'min_number';
+    const MIN_NUMBER = 'min_number';
 
     /**
      *
      */
-    public const CSS_CLASS = 'css_class';
+    const CSS_CLASS = 'css_class';
 
     /**
      * Get element_id

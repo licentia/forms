@@ -30,32 +30,32 @@ class Save extends \Magento\Framework\App\Action\Action
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */
-    protected \Magento\Framework\View\Result\PageFactory $resultPageFactory;
+    protected $resultPageFactory;
 
     /**
      * @var \Licentia\Forms\Model\FormEntriesFactory
      */
-    protected \Licentia\Forms\Model\FormEntriesFactory $formEntriesFactory;
+    protected $formEntriesFactory;
 
     /**
      * @var \Licentia\Forms\Model\FormsFactory
      */
-    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var \Magento\Customer\Model\Session
      */
-    protected \Magento\Customer\Model\Session $customerSession;
+    protected $customerSession;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected \Magento\Store\Model\StoreManagerInterface $storeManager;
+    protected $storeManager;
 
     /**
      * @var \Magento\Framework\App\Request\DataPersistorInterface
      */
-    protected \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor;
+    protected $dataPersistor;
 
     /**
      * @param \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
@@ -144,7 +144,9 @@ class Save extends \Magento\Framework\App\Action\Action
 
             return $resultRedirect->setPath($success);
 
-        } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+        } catch (\RuntimeException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage(

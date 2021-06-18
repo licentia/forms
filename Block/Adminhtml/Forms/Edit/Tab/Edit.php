@@ -36,32 +36,32 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
     /**
      * @var \Magento\Store\Model\System\Store
      */
-    protected \Magento\Store\Model\System\Store $systemStore;
+    protected $systemStore;
 
     /**
      * @var \Licentia\Forms\Model\FormsFactory
      */
-    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var \Licentia\Panda\Model\ExtraFieldsFactory
      */
-    protected \Licentia\Panda\Model\ExtraFieldsFactory $extraFieldsFactory;
+    protected $extraFieldsFactory;
 
     /**
      * @var \Magento\Cms\Model\Wysiwyg\Config
      */
-    protected \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig;
+    protected $wysiwygConfig;
 
     /**
      * @var \Licentia\Forms\Model\FormElementsFactory
      */
-    protected \Licentia\Forms\Model\FormElementsFactory $formElementsFactory;
+    protected $formElementsFactory;
 
     /**
      * @var \Licentia\Panda\Model\Source\CustomerAttributes
      */
-    protected \Licentia\Panda\Model\Source\CustomerAttributes $customerAttributes;
+    protected $customerAttributes;
 
     /**
      * Edit constructor.
@@ -105,7 +105,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
 
     /**
      * @return $this
-     * @noinspection AdditionOperationOnArraysInspection
      */
     protected function _prepareForm()
     {
@@ -338,6 +337,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             ],
         ];
 
+        /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create(
             [
                 'data' => [
@@ -431,7 +431,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        if (in_array($type, $mapFields['stars'], true)) {
+        if (in_array($type, $mapFields['stars'])) {
             $fieldset->addField(
                 'stars',
                 "select",
@@ -443,7 +443,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['html'], true)) {
+        if (in_array($type, $mapFields['html'])) {
             $wysiwygConfig = $this->wysiwygConfig->getConfig(['tab_id' => $this->getTabId()]);
             $fieldset->addField(
                 'html',
@@ -458,7 +458,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['extensions'], true)) {
+        if (in_array($type, $mapFields['extensions'])) {
             $fieldset->addField(
                 'extensions',
                 "text",
@@ -484,7 +484,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['protected'], true)) {
+        if (in_array($type, $mapFields['protected'])) {
 
             $extraNote = '';
 
@@ -545,10 +545,10 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                      ->setAfterElementHtml($html);
         }
 
-        if (in_array($type, $mapFields['placeholder'], true)) {
+        if (in_array($type, $mapFields['placeholder'])) {
             $note = 'This text will be displayed inside the form element to help the user understand the information he needs to add';
 
-            if ($type === 'checkbox') {
+            if ($type == 'checkbox') {
                 $note = 'This text will be displayed on the right side of the checkbox';
             }
 
@@ -565,7 +565,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if ($currentForm->isFrontend() && in_array($type, $mapFields['email_validation'], true)) {
+        if ($currentForm->isFrontend() && in_array($type, $mapFields['email_validation'])) {
             $existingMaps = $this->formElementsFactory->create()
                                                       ->getCollection()
                                                       ->addFieldToFilter('form_id', $currentForm->getId())
@@ -576,7 +576,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                 $existingMaps->addFieldToFilter('element_id', ['neq' => $current->getId()]);
             }
 
-            if ($existingMaps->getSize() === 0) {
+            if ($existingMaps->getSize() == 0) {
                 $html = '
                 <script type="text/javascript">
 
@@ -627,7 +627,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             }
         }
 
-        if ($currentForm->isFrontend() && in_array($type, $mapFields['params'], true)) {
+        if ($currentForm->isFrontend() && in_array($type, $mapFields['params'])) {
             $fieldset->addField(
                 'params',
                 "text",
@@ -642,7 +642,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['min_length'], true)) {
+        if (in_array($type, $mapFields['min_length'])) {
             $fieldset->addField(
                 'min_length',
                 "text",
@@ -654,7 +654,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                 ]
             );
         }
-        if (in_array($type, $mapFields['max_length'], true)) {
+        if (in_array($type, $mapFields['max_length'])) {
             $fieldset->addField(
                 'max_length',
                 "text",
@@ -667,7 +667,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['min_number'], true)) {
+        if (in_array($type, $mapFields['min_number'])) {
             $fieldset->addField(
                 'min_number',
                 "text",
@@ -680,7 +680,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['max_number'], true)) {
+        if (in_array($type, $mapFields['max_number'])) {
             $fieldset->addField(
                 'max_number',
                 "text",
@@ -694,7 +694,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
         }
 
         $dateFormat = $this->_localeDate->getDateFormat();
-        if (in_array($type, $mapFields['min_date'], true)) {
+        if (in_array($type, $mapFields['min_date'])) {
             $fieldset->addField(
                 'min_date',
                 "date",
@@ -708,7 +708,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['max_date'], true)) {
+        if (in_array($type, $mapFields['max_date'])) {
             $fieldset->addField(
                 'max_date',
                 "date",
@@ -722,7 +722,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['max_width'], true)) {
+        if (in_array($type, $mapFields['max_width'])) {
             $fieldset->addField(
                 'max_width',
                 "text",
@@ -734,7 +734,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['min_width'], true)) {
+        if (in_array($type, $mapFields['min_width'])) {
             $fieldset->addField(
                 'min_width',
                 "text",
@@ -746,7 +746,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['max_height'], true)) {
+        if (in_array($type, $mapFields['max_height'])) {
             $fieldset->addField(
                 'max_height',
                 "text",
@@ -757,7 +757,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                 ]
             );
         }
-        if (in_array($type, $mapFields['min_height'], true)) {
+        if (in_array($type, $mapFields['min_height'])) {
             $fieldset->addField(
                 'min_height',
                 "text",
@@ -769,7 +769,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['resize'], true)) {
+        if (in_array($type, $mapFields['resize'])) {
             $fieldset->addField(
                 'resize',
                 "select",
@@ -782,7 +782,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['multiple'], true)) {
+        if (in_array($type, $mapFields['multiple'])) {
             $fieldset->addField(
                 'allow_multiple',
                 "text",
@@ -796,9 +796,9 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['hint'], true)) {
+        if (in_array($type, $mapFields['hint'])) {
             $note = 'Extra information to be displayed below the form element';
-            if ($type === 'checkbox') {
+            if ($type == 'checkbox') {
                 $note = 'This text will be displayed on the right side of the checkbox';
             }
 
@@ -813,7 +813,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['unique'], true)) {
+        if (in_array($type, $mapFields['unique'])) {
             $fieldset->addField(
                 'unique',
                 "select",
@@ -826,7 +826,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if ($currentForm->isFrontend() && in_array($type, $mapFields['map'], true)) {
+        if ($currentForm->isFrontend() && in_array($type, $mapFields['map'])) {
 
             /** @var \Licentia\Panda\Model\ResourceModel\ExtraFields\Collection $mapCollection */
             $mapCollection = $this->extraFieldsFactory->create()->getCollection();
@@ -838,7 +838,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
 
             $options['0'] = __('No Mapping');
 
-            if ($type !== 'email' && $type !== 'cellphone') {
+            if ($type != 'email' && $type != 'cellphone') {
                 if ($current->getId()) {
                     $existingMaps->addFieldToFilter('element_id', ['neq' => $current->getId()]);
                 }
@@ -853,23 +853,23 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                 }
             }
 
-            if ($type === 'email') {
+            if ($type == 'email') {
                 $mapCollection->addFieldToFilter('type', 'email');
 
                 $existingMaps->addFieldToFilter('map', 'email');
-                if ($existingMaps->getSize() === 0) {
+                if ($existingMaps->getSize() == 0) {
                     $options['email'] = __('Subscriber Email');
                 }
-            } elseif ($type === 'cellphone') {
+            } elseif ($type == 'cellphone') {
                 $mapCollection->addFieldToFilter('type', 'cellphone');
 
                 $existingMaps->addFieldToFilter('map', 'cellphone');
-                if ($existingMaps->getSize() === 0) {
+                if ($existingMaps->getSize() == 0) {
                     $options['cellphone'] = __('Subscriber Cellphone');
                 }
             } elseif (in_array($type, ['radios', 'checkboxes', 'select', 'options'])) {
                 $mapCollection->addFieldToFilter('type', 'options');
-            } elseif ($type === 'number') {
+            } elseif ($type == 'number') {
                 $mapCollection->addFieldToFilter('type', 'number');
             } elseif (in_array($type, ['date'])) {
                 $mapCollection->addFieldToFilter('type', 'date');
@@ -877,22 +877,22 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                 $existingMapsLastName = clone $existingMaps;
                 $existingMapsLastDob = clone $existingMaps;
 
-                if ($type === 'text') {
+                if ($type == 'text') {
                     $existingMaps->addFieldToFilter('map', 'firstname');
-                    if ($existingMaps->getSize() === 0) {
+                    if ($existingMaps->getSize() == 0) {
                         $options['firstname'] = __('Subscriber First Name');
                     }
                 }
 
-                if ($type === 'text') {
+                if ($type == 'text') {
                     $existingMapsLastName->addFieldToFilter('map', 'lastname');
-                    if ($existingMapsLastName->getSize() === 0) {
+                    if ($existingMapsLastName->getSize() == 0) {
                         $options['lastname'] = __('Subscriber Last Name');
                     }
                 }
-                if ($type === 'text') {
+                if ($type == 'text') {
                     $existingMapsLastDob->addFieldToFilter('map', 'dob');
-                    if ($existingMapsLastName->getSize() === 0) {
+                    if ($existingMapsLastName->getSize() == 0) {
                         $options['dob'] = __('Subscriber Date of Birth');
                     }
                 }
@@ -901,7 +901,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             }
             $options = $options + $mapCollection->toOptionHash();
 
-            if (count($options) === 1) {
+            if (count($options) == 1) {
                 $options = ['0' => __('No Subscriber Extra Fields Available to Map for this Type of Field')];
             }
 
@@ -948,7 +948,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
         }
 
         if ($currentForm->isFrontend() &&
-            in_array($type, $mapFields['map_customer'], true) &&
+            in_array($type, $mapFields['map_customer']) &&
             $currentForm->getRegisteredOnly() > 0) {
             $fieldset->addField(
                 'map_customer',
@@ -962,7 +962,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['options'], true)) {
+        if (in_array($type, $mapFields['options'])) {
             $fieldset->addField(
                 'options',
                 "textarea",
@@ -974,7 +974,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['required'], true)) {
+        if (in_array($type, $mapFields['required'])) {
             $fieldset->addField(
                 'required',
                 "select",
@@ -987,7 +987,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['default'], true)) {
+        if (in_array($type, $mapFields['default'])) {
             $fieldset->addField(
                 'default',
                 "text",
@@ -1000,7 +1000,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['css_class'], true)) {
+        if (in_array($type, $mapFields['css_class'])) {
             $fieldset->addField(
                 'css_class',
                 "text",
@@ -1013,7 +1013,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['disabled'], true)) {
+        if (in_array($type, $mapFields['disabled'])) {
             $fieldset->addField(
                 'disabled',
                 'select',
@@ -1029,7 +1029,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['checked'], true)) {
+        if (in_array($type, $mapFields['checked'])) {
             $fieldset->addField(
                 'checked',
                 'select',
@@ -1043,7 +1043,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             );
         }
 
-        if (in_array($type, $mapFields['pattern'], true)) {
+        if (in_array($type, $mapFields['pattern'])) {
             $fieldset->addField(
                 'pattern',
                 "text",
@@ -1060,7 +1060,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
             'text',
             [
                 'name'     => 'code',
-                'disabled' => (bool) $current->getCode(),
+                'disabled' => $current->getCode() ? true : false,
                 'label'    => __('Code'),
                 'title'    => __('Code'),
                 'class'    => __('validate-code'),

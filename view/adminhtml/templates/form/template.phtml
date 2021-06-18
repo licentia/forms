@@ -57,7 +57,7 @@ echo $block->getFormHtml() ?>
                 {title}
             </td>
             <td style="width: 200px">
-                <?= __('Form Title') ?>
+                <?= __('Form Title'); ?>
             </td>
         </tr>
         <tr>
@@ -65,7 +65,7 @@ echo $block->getFormHtml() ?>
                 {description}
             </td>
             <td style="width: 200px">
-                <?= __('Form Description') ?>
+                <?= __('Form Description'); ?>
             </td>
         </tr>
         <tr>
@@ -73,16 +73,16 @@ echo $block->getFormHtml() ?>
                 {button}
             </td>
             <td style="width: 200px">
-                <?= __('Form Submit Button') ?>
+                <?= __('Form Submit Button'); ?>
             </td>
         </tr>
         <?php foreach ($block->getFormElements() as $element) : ?>
             <tr>
                 <td style="width: 200px">
-                    {{element_<?= $element->getId() ?>}}
+                    {{element_<?= $element->getId(); ?>}}
                 </td>
                 <td style="width: 200px">
-                    Form Element: <?= $element->getName() ?>
+                    Form Element: <?= $element->getName(); ?>
                 </td>
             </tr>
 

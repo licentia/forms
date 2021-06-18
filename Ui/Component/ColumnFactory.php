@@ -31,12 +31,12 @@ class ColumnFactory
     /**
      * @var \Magento\Framework\View\Element\UiComponentFactory
      */
-    protected \Magento\Framework\View\Element\UiComponentFactory $componentFactory;
+    protected $componentFactory;
 
     /**
      * @var array
      */
-    protected array $jsComponentMap = [
+    protected $jsComponentMap = [
         'text'        => 'Magento_Ui/js/grid/columns/column',
         'select'      => 'Magento_Ui/js/grid/columns/select',
         'multiselect' => 'Magento_Ui/js/grid/columns/select',
@@ -46,7 +46,7 @@ class ColumnFactory
     /**
      * @var array
      */
-    protected array $dataTypeMap = [
+    protected $dataTypeMap = [
         'default'     => 'text',
         'text'        => 'text',
         'boolean'     => 'select',
@@ -69,7 +69,7 @@ class ColumnFactory
      * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
      * @param array                                                        $config
      *
-     * @return \Magento\Framework\View\Element\UiComponentInterface
+     * @return \Magento\Ui\Component\Listing\Columns\ColumnInterface
      */
     public function create($attribute, $context, array $config = [])
     {
@@ -117,7 +117,9 @@ class ColumnFactory
     protected function getDataType($attribute)
     {
 
-        return $this->dataTypeMap[$attribute->getType()] ?? $this->dataTypeMap['default'];
+        return isset($this->dataTypeMap[$attribute->getType()])
+            ? $this->dataTypeMap[$attribute->getType()]
+            : $this->dataTypeMap['default'];
     }
 
     /**
@@ -133,6 +135,6 @@ class ColumnFactory
         $filtersMap = ['date' => 'dateRange'];
         $result = array_replace_recursive($this->dataTypeMap, $filtersMap);
 
-        return $result[$frontendInput] ?? $result['default'];
+        return isset($result[$frontendInput]) ? $result[$frontendInput] : $result['default'];
     }
 }

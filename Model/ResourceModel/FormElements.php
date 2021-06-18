@@ -31,14 +31,13 @@ class FormElements extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * @var string
      */
-    protected string $_idFieldName = 'element_id';
+    protected $_idFieldName = 'element_id';
 
     /**
      * Initialize resource model
      * Get tablename from config
      *
      * @return void
-     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {

@@ -31,7 +31,7 @@ class Options implements OptionSourceInterface
     /**
      * @var formsFactory
      */
-    protected FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * Options constructor.

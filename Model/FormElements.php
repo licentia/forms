@@ -36,7 +36,7 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @var string
      */
-    protected string $_eventPrefix = 'panda_form_element';
+    protected $_eventPrefix = 'panda_form_element';
 
     /**
      * Parameter name in event
@@ -45,13 +45,12 @@ class FormElements extends \Magento\Framework\Model\AbstractModel implements For
      *
      * @var string
      */
-    protected string $_eventObject = 'form_element';
+    protected $_eventObject = 'form_element';
 
     /**
      * Initialize resource model
      *
      * @return void
-     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {

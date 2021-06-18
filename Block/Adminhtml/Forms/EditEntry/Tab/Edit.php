@@ -36,27 +36,27 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
     /**
      * @var \Magento\Store\Model\System\Store
      */
-    protected \Magento\Store\Model\System\Store $systemStore;
+    protected $systemStore;
 
     /**
      * @var \Licentia\Forms\Model\FormsFactory
      */
-    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var \Magento\Cms\Model\Wysiwyg\Config
      */
-    protected \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig;
+    protected $wysiwygConfig;
 
     /**
      * @var \Licentia\Forms\Model\FormElementsFactory
      */
-    protected \Licentia\Forms\Model\FormElementsFactory $formElementsFactory;
+    protected $formElementsFactory;
 
     /**
      * @var \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory
      */
-    protected \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory $formElementsCollection;
+    protected $formElementsCollection;
 
     /**
      * Edit constructor.
@@ -115,6 +115,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
         /** @var \Licentia\Forms\Model\ResourceModel\FormElements\Collection $elements */
         $elements = $currentForm->getActiveElements();
 
+        /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create(
             [
                 'data' => [
@@ -176,7 +177,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
 
             $nameInput = $name;
 
-            if (($element->getType() === 'file' || $element->getType() === 'image') && $element->getExtensions()) {
+            if (($element->getType() == 'file' || $element->getType() == 'image') && $element->getExtensions()) {
                 $element->setHint($element->getHint() . ' Allowed extensions: ' . $element->getExtensions());
 
                 $nameInput = $name . '[]';
@@ -204,7 +205,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                     'values'      => $this->getInputValuesForFormElement($element),
                     'class'       => $this->getCssClassesForFormElement($element),
                     'date_format' => $dateFormat,
-                    'disabled'    => (bool) $element->getDisabled(),
+                    'disabled'    => $element->getDisabled() ? true : false,
                     'config'      => $wysiwygConfig,
                 ]
             );
@@ -306,7 +307,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
     {
 
         $return = null;
-        if ($element->getType() === 'checkbox') {
+        if ($element->getType() == 'checkbox') {
             $element->setOptions('Yes');
         }
 

@@ -34,6 +34,7 @@ class NewAction extends \Licentia\Forms\Controller\Adminhtml\Forms
     {
 
         parent::execute();
+        /** @var \Magento\Framework\Controller\Result\Forward $resultForward */
         $resultForward = $this->resultForwardFactory->create();
 
         return $resultForward->forward('edit');

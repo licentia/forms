@@ -22,7 +22,6 @@ namespace Licentia\Forms\Controller\Adminhtml\Forms;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ResponseInterface;
-use Licentia\Forms\Block\Adminhtml\Forms\Grid;
 
 /**
  * Class ExportXml
@@ -51,7 +50,7 @@ class ExportXml extends \Licentia\Forms\Controller\Adminhtml\Forms
         $fileName = 'form_entries' . $name . '.xml';
         $content = $this->_view->getLayout()
                                ->createBlock(
-                                   Grid::class
+                                   'Licentia\Forms\Block\Adminhtml\Forms\Grid'
                                )
                                ->getXml();
 

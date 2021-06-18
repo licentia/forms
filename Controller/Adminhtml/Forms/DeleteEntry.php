@@ -48,7 +48,9 @@ class DeleteEntry extends \Licentia\Forms\Controller\Adminhtml\Forms
             try {
                 $model->delete();
                 $this->messageManager->addSuccessMessage(__('You deleted the Entry.'));
-            } catch (\Magento\Framework\Exception\LocalizedException | \RuntimeException $e) {
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            } catch (\RuntimeException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage(

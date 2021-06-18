@@ -33,19 +33,19 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @var \Licentia\Forms\Model\ResourceModel\FormEntries\CollectionFactory
      */
-    protected \Licentia\Forms\Model\ResourceModel\FormEntries\CollectionFactory $collectionFactory;
+    protected $collectionFactory;
 
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
-    protected ?\Magento\Framework\Registry $registry;
+    protected $registry = null;
 
     /**
      * @var \Licentia\Forms\Model\FormsFactory
      */
-    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -55,7 +55,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * @var \Magento\Framework\Url
      */
-    protected \Magento\Framework\Url $urlHelper;
+    protected $urlHelper;
 
     /**
      * @param \Magento\Framework\Url                                            $url
@@ -86,7 +86,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         parent::__construct($context, $backendHelper, $data);
     }
 
-    /** @noinspection MagicMethodsValidityInspection */
     public function _construct()
     {
 
@@ -201,7 +200,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
             $fieldName = str_replace(Forms::FIELD_IDENTIFIER, 'field_', $field);
 
-            if ($element->getType() === 'html') {
+            if ($element->getType() == 'html') {
                 continue;
             }
 
@@ -215,21 +214,21 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'index'  => $fieldName,
             ];
 
-            if ($element->getType() === 'file' || $element->getType() === 'image') {
+            if ($element->getType() == 'file' || $element->getType() == 'image') {
                 $options['frame_callback'] = [$this, 'fileResult'];
             }
 
-            if ($element->getType() === 'country') {
+            if ($element->getType() == 'country') {
                 $options['type'] = 'options';
                 $options['options'] = Forms::getCountriesList();
             }
 
-            if ($element->getType() === 'number') {
+            if ($element->getType() == 'number') {
                 $options['type'] = 'number';
                 $options['filter_index'] = new \Zend_Db_Expr('CAST(`' . $fieldName . '` AS SIGNED)');
             }
 
-            if ($element->getType() === 'date') {
+            if ($element->getType() == 'date') {
                 $options['type'] = 'date';
                 $options['filter_index'] = new \Zend_Db_Expr('CAST(`' . $fieldName . '` AS DATE)');
             }
@@ -272,11 +271,11 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param \Magento\Catalog\Model\Product|\Magento\Framework\DataObject $item
+     * @param \Magento\Catalog\Model\Product|\Magento\Framework\DataObject $row
      *
      * @return bool
      */
-    public function getRowUrl($item)
+    public function getRowUrl($row)
     {
 
         /** @var Forms $form */
@@ -286,7 +285,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             return false;
         }
 
-        return $this->getUrl('*/*/newEntry', ['_current' => true, 'etid' => $item->getData('entry_id')]);
+        return $this->getUrl('*/*/newEntry', ['_current' => true, 'etid' => $row->getData('entry_id')]);
     }
 
     /**
@@ -320,7 +319,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      *
      * @param $row
      *
-     * @return string
+     * @return \Magento\Framework\Phrase|string
      */
     public function delete($value, $row)
     {
@@ -336,7 +335,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      *
      * @param $row
      *
-     * @return string
+     * @return \Magento\Framework\Phrase|string
      */
     public function validate($value, $row)
     {

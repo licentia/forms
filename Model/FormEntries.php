@@ -36,24 +36,24 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      *
      */
-    public const XML_PATH_PANDA_FORMS_TEMPLATE = 'panda_forms/forms/template';
+    const XML_PATH_PANDA_FORMS_TEMPLATE = 'panda_forms/forms/template';
 
     /**
      *
      */
-    public const XML_PATH_PANDA_FORMS_NOTIFICATION = 'panda_forms/forms/notify';
+    const XML_PATH_PANDA_FORMS_NOTIFICATION = 'panda_forms/forms/notify';
 
     /**
      *
      */
-    public const XML_PATH_PANDA_FORMS_NOTIFICATION_TEMPLATE = 'panda_forms/forms/notify_template';
+    const XML_PATH_PANDA_FORMS_NOTIFICATION_TEMPLATE = 'panda_forms/forms/notify_template';
 
     /**
      * Prefix of model events names
      *
      * @var string
      */
-    protected string $_eventPrefix = 'panda_form_entry';
+    protected $_eventPrefix = 'panda_form_entry';
 
     /**
      * Parameter name in event
@@ -62,82 +62,82 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @var string
      */
-    protected string $_eventObject = 'form_entry';
+    protected $_eventObject = 'form_entry';
 
     /**
      * @var FormElementsFactory
      */
-    protected FormElementsFactory $formElementsFactory;
+    protected $formElementsFactory;
 
     /**
      * @var FormsFactory
      */
-    protected FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var ResourceModel\FormElements\CollectionFactory
      */
-    protected ResourceModel\FormElements\CollectionFactory $formElementsCollection;
+    protected $formElementsCollection;
 
     /**
      * @var \Licentia\Panda\Model\SubscribersFactory
      */
-    protected \Licentia\Panda\Model\SubscribersFactory $subscribersFactory;
+    protected $subscribersFactory;
 
     /**
      * @var \Licentia\Panda\Model\ExtraFieldsFactory
      */
-    protected \Licentia\Panda\Model\ExtraFieldsFactory $extraFieldsFactory;
+    protected $extraFieldsFactory;
 
     /**
      * @var \Magento\MediaStorage\Model\File\UploaderFactory
      */
-    protected \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory;
+    protected $uploaderFactory;
 
     /**
      * @var \Magento\Framework\Filesystem
      */
-    protected \Magento\Framework\Filesystem $filesystem;
+    protected $filesystem;
 
     /**
      * @var \Magento\Captcha\Helper\Data
      */
-    protected \Magento\Captcha\Helper\Data $helper;
+    protected $helper;
 
     /**
      * @var \Magento\Captcha\Observer\CaptchaStringResolver
      */
-    protected \Magento\Captcha\Observer\CaptchaStringResolver $captchaStringResolver;
+    protected $captchaStringResolver;
 
     /**
      * @var \Magento\Framework\App\RequestInterface
      */
-    protected \Magento\Framework\App\RequestInterface $request;
+    protected $request;
 
     /**
      * @var \Magento\Framework\Mail\Template\TransportBuilder
      */
-    protected \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder;
+    protected $transportBuilder;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected \Magento\Store\Model\StoreManagerInterface $storeManager;
+    protected $storeManager;
 
     /**
      * @var \Magento\Framework\UrlInterface
      */
-    protected \Magento\Framework\UrlInterface $urlInterface;
+    protected $urlInterface;
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
+    protected $scopeConfig;
 
     /**
      * @var \Licentia\Panda\Model\AutorespondersFactory
      */
-    protected \Licentia\Panda\Model\AutorespondersFactory $autorespondersFactory;
+    protected $autorespondersFactory;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -147,22 +147,22 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @var \Magento\Customer\Model\Session
      */
-    protected \Magento\Customer\Model\Session $customerSession;
+    protected $customerSession;
 
     /**
      * @var \Magento\Customer\Model\CustomerFactory
      */
-    protected \Magento\Customer\Model\CustomerFactory $customerFactory;
+    protected $customerFactory;
 
     /**
      * @var \Magento\Framework\Image\AdapterFactory
      */
-    protected \Magento\Framework\Image\AdapterFactory $imageFactory;
+    protected $imageFactory;
 
     /**
      * @var EncryptorInterface
      */
-    protected EncryptorInterface $encryptor;
+    protected $encryptor;
 
     /**
      * FormEntries constructor.
@@ -254,7 +254,6 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      * Initialize resource model
      *
      * @return void
-     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {
@@ -265,7 +264,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return Forms
      */
-    public function getForm(): Forms
+    public function getForm()
     {
 
         if (!$this->getFormId()) {
@@ -280,7 +279,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      * @throws \Exception
      * @throws \Magento\Framework\Validator\Exception
      */
-    public function validateEntry($isAdmin = false): FormEntries
+    public function validateEntry($isAdmin = false)
     {
 
         if (!$this->getForm()->isEnabled()) {
@@ -315,7 +314,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return bool
      */
-    public function validateUrl($url): bool
+    public function validateUrl($url)
     {
 
         if (!preg_match(
@@ -334,10 +333,14 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return bool
      */
-    public function validateEmail($email): bool
+    public function validateEmail($email)
     {
 
-        return !(!filter_var($email, FILTER_VALIDATE_EMAIL) && $email != '');
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) > 0) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -401,7 +404,11 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
         foreach ($formElements as $formElement) {
             if (array_key_exists('field_' . $formElement->getData('entry_code'), $entryArray)) {
-                $value = $entryArray['field_' . $formElement->getData('entry_code') . '_rendered'] ?? $entryArray['field_' . $formElement->getData('entry_code')];
+                $value = $entryArray['field_' . $formElement->getData('entry_code')];
+
+                if (isset($entryArray['field_' . $formElement->getData('entry_code') . '_rendered'])) {
+                    $value = $entryArray['field_' . $formElement->getData('entry_code') . '_rendered'];
+                }
 
                 $fieldsEmail .= $formElement->getData('name') . ': ' . $value . "<br>";
             }
@@ -445,7 +452,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return $this
      */
-    public function afterLoad(): FormEntries
+    public function afterLoad()
     {
 
         parent::afterLoad();
@@ -458,7 +465,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return \Magento\Framework\Model\AbstractModel
      */
-    public function prepareForDisplay(): \Magento\Framework\Model\AbstractModel
+    public function prepareForDisplay()
     {
 
         /** @var FormElements $element */
@@ -513,7 +520,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return \Magento\Framework\Model\AbstractModel
      */
-    public function afterSave(): \Magento\Framework\Model\AbstractModel
+    public function afterSave()
     {
 
         if (!$this->getRequiredEmailValidation()) {
@@ -560,7 +567,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return $this
      */
-    public function loadDataFromRequest(): FormEntries
+    public function loadDataFromRequest()
     {
 
         $formId = $this->request->getParam('form_id');
@@ -582,7 +589,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      * @return \Magento\Framework\Model\AbstractModel
      * @throws \Magento\Framework\Validator\Exception
      */
-    public function validateElements(): \Magento\Framework\Model\AbstractModel
+    public function validateElements()
     {
 
         $form = $this->getForm();
@@ -638,33 +645,34 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                 $specialElements[] = Forms::FIELD_IDENTIFIER . $element->getEntryCode();
             }
 
-            if ($element->getType() === 'captcha') {
+            if ($element->getType() == 'captcha') {
                 $formId = 'panda_forms';
 
                 /** @var \Magento\Captcha\Model\DefaultModel $captcha */
                 $captcha = $this->helper->getCaptcha($formId);
 
-                if ($captcha->isRequired() && !$captcha->isCorrect($this->captchaStringResolver->resolve($this->request,
-                        $formId))) {
-                            $errors[$field] = __('Invalid Captcha');
-                            continue;
-                        }
+                if ($captcha->isRequired()) {
+                    if (!$captcha->isCorrect($this->captchaStringResolver->resolve($this->request, $formId))) {
+                        $errors[$field] = __('Invalid Captcha');
+                        continue;
+                    }
+                }
             }
 
             if (!$value && $element->getRequired() &&
-                $element->getType() !== 'file' && $element->getType() !== 'image') {
+                $element->getType() != 'file' && $element->getType() != 'image') {
                 $errors[$field] = __('%1 Field is Required', __($element->getName()));
                 continue;
             }
 
             if ($this->getId() &&
-                ($element->getType() === 'file' || $element->getType() === 'image') &&
+                ($element->getType() == 'file' || $element->getType() == 'image') &&
                 empty($value['name'])) {
                 $this->unsetData('panda_' . $element->getEntryCode());
             }
 
             if ($this->getId() &&
-                ($element->getType() === 'file' || $element->getType() === 'image') &&
+                ($element->getType() == 'file' || $element->getType() == 'image') &&
                 $this->getData('panda_' . $element->getEntryCode() . '_delete')
             ) {
                 if ($id && $id->getId()) {
@@ -694,7 +702,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                 $errors = array_merge($errors, $valErrors);
             }
 
-            if (!$valErrors && ($element->getType() === 'image' || $element->getType() === 'file') && is_array($value)) {
+            if (!$valErrors && ($element->getType() == 'image' || $element->getType() == 'file') && is_array($value)) {
 
                 foreach ($value as $index => $upload) {
                     if ($index > 0 && ($index + 1) > $element->getAllowMultiple()) {
@@ -707,7 +715,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
             }
 
-            if ($element->getType() === 'email' && $element->getEmailValidation() && !$this->getId()) {
+            if ($element->getType() == 'email' && $element->getEmailValidation() && !$this->getId()) {
                 $date = (int) $form->getData('link_expiration');
 
                 if ($date == 0) {
@@ -743,7 +751,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                 $this->setData($field, $element->getDefault());
             }
 
-            if ($element->getType() === 'checkbox' && $value !== 'checked') {
+            if ($element->getType() == 'checkbox' && $value != 'checked') {
                 $this->setData($field, 'unchecked');
             }
 
@@ -751,15 +759,15 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                 $customerMap[$element->getMapCustomer()] = $value;
             }
 
-            if ($element->getType() === 'cellphone' && $element->getMap()) {
+            if ($element->getType() == 'cellphone' && $element->getMap()) {
                 $map['cellphone'] = $value;
-            } elseif ($element->getType() === 'text' && $element->getMap() === 'firstname') {
+            } elseif ($element->getType() == 'text' && $element->getMap() == 'firstname') {
                 $map['firstname'] = $value;
-            } elseif ($element->getType() === 'text' && $element->getMap() === 'lastname') {
+            } elseif ($element->getType() == 'text' && $element->getMap() == 'lastname') {
                 $map['lastname'] = $value;
-            } elseif ($element->getType() === 'text' && $element->getMap() === 'dob') {
+            } elseif ($element->getType() == 'text' && $element->getMap() == 'dob') {
                 $map['dob'] = $value;
-            } elseif ($element->getType() === 'email' && $element->getMap()) {
+            } elseif ($element->getType() == 'email' && $element->getMap()) {
                 $map['email'] = $value;
             } elseif ($element->getMap()) {
                 if (is_array($value)) {
@@ -795,7 +803,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
         foreach ($this->getData() as $key => $value) {
             if (stripos($key, Forms::FIELD_IDENTIFIER) !== false ||
-                (!in_array($key, $specialElements, true) && is_array($value))) {
+                (!in_array($key, $specialElements) && is_array($value))) {
 
                 if (is_array($value) && (count($value) != count($value, COUNT_RECURSIVE))) {
                     $value = '';
@@ -811,6 +819,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
         }
         if (isset($map['email']) || $this->getCustomerId()) {
 
+            /** @var \Licentia\Panda\Model\Subscribers $subscriber */
             $subscriber = $this->subscribersFactory->create();
 
             if (isset($map['email'])) {
@@ -858,9 +867,9 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      * @param      $fieldValue
      * @param null $formId
      *
-     * @return bool
+     * @return bool|string
      */
-    public function validateUnique($fieldName, $fieldValue, $formId = null): bool
+    public function validateUnique($fieldName, $fieldValue, $formId = null)
     {
 
         $fieldName = str_replace(Forms::FIELD_IDENTIFIER, 'field_', $fieldName);
@@ -883,7 +892,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
             $collection->addFieldToFilter('entry_id', ['neq' => $this->getEntryId()]);
         }
 
-        return $collection->getSize() == 0;
+        return ($collection->getSize() == 0) ? true : false;
     }
 
     /**
@@ -892,14 +901,14 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return bool
      */
-    public function validateElement(FormElements $element, $value): bool
+    public function validateElement(FormElements $element, $value)
     {
 
         $errors = false;
 
         $field = Forms::FIELD_IDENTIFIER . $element->getEntryCode();
 
-        if ($element->getType() === 'phone') {
+        if ($element->getType() == 'phone') {
             $phone = $this->validatePhone($value);
 
             if (!$phone) {
@@ -913,15 +922,15 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
             }
         }
 
-        if ($element->getType() === 'email' && !$this->validateEmail($value)) {
+        if ($element->getType() == 'email' && !$this->validateEmail($value)) {
             $errors[$field] = __('Invalid email in %1', __($element->getName()));
         }
 
-        if ($element->getType() === 'url' && !$this->validateUrl($value)) {
+        if ($element->getType() == 'url' && !$this->validateUrl($value)) {
             $errors[$field] = __('Invalid URL %1 in %2', $value, __($element->getName()));
         }
 
-        if ($element->getType() === 'number' && !is_numeric($value)) {
+        if ($element->getType() == 'number' && !is_numeric($value)) {
             $errors[$field] = __(
                 'Invalid number %1 in %2. Please use: CountryCode-PhoneNumber. Ex: 351-913241234',
                 $value,
@@ -929,7 +938,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
             );
         }
 
-        if ($element->getType() === 'date') {
+        if ($element->getType() == 'date') {
             try {
                 $date = new \DateTime($value);
                 $result = $date->format('Y-m-d');
@@ -955,7 +964,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
             }
         }
 
-        if (($element->getType() === 'image' || $element->getType() === 'file') &&
+        if (($element->getType() == 'image' || $element->getType() == 'file') &&
             is_array($value) &&
             isset($value[0]) &&
             isset($value[0]['name']) && $value[0]['name'] != '' &&
@@ -981,6 +990,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                         continue;
                     }
 
+                    /** @var  \Magento\MediaStorage\Model\File\Uploader $uploader */
                     $uploader = $this->uploaderFactory->create(['fileId' => $field . '[' . $index . ']']);
 
                     if ($element->getExtensions()) {
@@ -1010,14 +1020,14 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                         $file = $newDir . $uploader->getUploadedFileName();
                         $filePath = $path . $uploader->getUploadedFileName();
 
-                        if ($element->getType() === 'image') {
+                        if ($element->getType() == 'image') {
                             if (!$element->getResize()) {
                                 $size = getimagesize($filePath);
 
-                                if (($element->getMaxWidth() && $element->getMaxWidth() > $size[0]) ||
-                                    ($element->getMaxHeight() && $element->getMaxHeight() > $size[1]) ||
-                                    ($element->getMinHeight() && $element->getMinHeight() < $size[1]) ||
-                                    ($element->getMinWidth() && $element->getMinWidth() < $size[0])) {
+                                if ($element->getMaxWidth() && $element->getMaxWidth() > $size[0] ||
+                                    $element->getMaxHeight() && $element->getMaxHeight() > $size[1] ||
+                                    $element->getMinHeight() && $element->getMinHeight() < $size[1] ||
+                                    $element->getMinWidth() && $element->getMinWidth() < $size[0]) {
                                     $errors[$field] = __(
                                         'Error in field %1: %2 Invalid Dimensions',
                                         __($element->getName(), $e->getMessage())
@@ -1051,11 +1061,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
                             $fileProtect = rtrim($protectPath, '/') . '/' . $file;
 
                             if (!is_dir(pathinfo($fileProtect)['dirname'])) {
-                                if (!mkdir($concurrentDirectory = pathinfo($fileProtect)['dirname'], 0755,
-                                        true) && !is_dir($concurrentDirectory)) {
-                                    throw new \RuntimeException(sprintf('Directory "%s" was not created',
-                                        $concurrentDirectory));
-                                }
+                                mkdir(pathinfo($fileProtect)['dirname'], 0755, true);
                             }
 
                             rename($filePath, $fileProtect);
@@ -1070,9 +1076,9 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
             } catch (\Exception $e) {
                 $errors[$field] = __('Error in field %1: %2', __($element->getName()), $e->getMessage());
             }
-        } elseif (($element->getType() === 'image' || $element->getType() === 'file') &&
+        } elseif (($element->getType() == 'image' || $element->getType() == 'file') &&
                   ((isset($value['delete']) && $value['delete'] == 1) ||
-                   (isset($value[1]['delete']) && $value[1]['delete'] == 1))) {
+                   isset($value[1]['delete']) && $value[1]['delete'] == 1)) {
             $file = null;
 
             if (isset($value['value'])) {
@@ -1115,8 +1121,9 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
             foreach ((array) $value as $item) {
                 $item = trim($item);
-                if (!in_array($item, $options, true) && $item) {
+                if (!in_array($item, $options) && $item) {
                     $errors[$field] = __('Unexpected value %1 in %2', $item, __($element->getName()));
+                    continue;
                 }
             }
         }
@@ -1131,9 +1138,10 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      * @return array
      * @throws LocalizedException
      */
-    public function getListByCode(string $formCode, $storeId = null): array
+    public function getListByCode(string $formCode, $storeId = null)
     {
 
+        /** @var Forms $form */
         $form = $this->formsFactory->create()->load($formCode, 'code');
 
         if (!$form->getId()) {
@@ -1170,7 +1178,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return array
      */
-    public function getEntryToDisplay($data = null): array
+    public function getEntryToDisplay($data = null)
     {
 
         $form = $this->getForm();
@@ -1231,7 +1239,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getEntryId(): string
+    public function getEntryId()
     {
 
         return $this->getData(self::ENTRY_ID);
@@ -1244,7 +1252,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setEntryId($entry_id): FormEntries
+    public function setEntryId($entry_id)
     {
 
         return $this->setData(self::ENTRY_ID, $entry_id);
@@ -1255,7 +1263,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getFormId(): string
+    public function getFormId()
     {
 
         return $this->getData(self::FORM_ID);
@@ -1268,7 +1276,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setFormId($form_id): FormEntries
+    public function setFormId($form_id)
     {
 
         return $this->setData(self::FORM_ID, $form_id);
@@ -1279,7 +1287,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getSubscriberId(): string
+    public function getSubscriberId()
     {
 
         return $this->getData(self::SUBSCRIBER_ID);
@@ -1292,7 +1300,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setSubscriberId($subscriber_id): FormEntries
+    public function setSubscriberId($subscriber_id)
     {
 
         return $this->setData(self::SUBSCRIBER_ID, $subscriber_id);
@@ -1303,7 +1311,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getCustomerId(): string
+    public function getCustomerId()
     {
 
         return $this->getData(self::CUSTOMER_ID);
@@ -1316,7 +1324,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setCustomerId($customer_id): FormEntries
+    public function setCustomerId($customer_id)
     {
 
         return $this->setData(self::CUSTOMER_ID, $customer_id);
@@ -1327,7 +1335,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getCreatedAt(): string
+    public function getCreatedAt()
     {
 
         return $this->getData(self::CREATED_AT);
@@ -1340,7 +1348,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setCreatedAt($created_at): FormEntries
+    public function setCreatedAt($created_at)
     {
 
         return $this->setData(self::CREATED_AT, $created_at);
@@ -1351,7 +1359,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getValidated(): string
+    public function getValidated()
     {
 
         return $this->getData(self::VALIDATED);
@@ -1364,7 +1372,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setValidated($validated): FormEntries
+    public function setValidated($validated)
     {
 
         return $this->setData(self::VALIDATED, $validated);
@@ -1375,7 +1383,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getValidationCode(): string
+    public function getValidationCode()
     {
 
         return $this->getData(self::VALIDATION_CODE);
@@ -1388,7 +1396,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setValidationCode($validation_code): FormEntries
+    public function setValidationCode($validation_code)
     {
 
         return $this->setData(self::VALIDATION_CODE, $validation_code);
@@ -1399,7 +1407,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getValidationExpiresAt(): string
+    public function getValidationExpiresAt()
     {
 
         return $this->getData(self::VALIDATION_EXPIRES_AT);
@@ -1412,7 +1420,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setValidationExpiresAt($validation_expires_at): FormEntries
+    public function setValidationExpiresAt($validation_expires_at)
     {
 
         return $this->setData(self::VALIDATION_EXPIRES_AT, $validation_expires_at);
@@ -1423,7 +1431,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField1(): string
+    public function getField1()
     {
 
         return $this->getData(self::FIELD_1);
@@ -1436,7 +1444,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField1($field1): FormEntries
+    public function setField1($field1)
     {
 
         return $this->setData(self::FIELD_1, $field1);
@@ -1447,7 +1455,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField2(): string
+    public function getField2()
     {
 
         return $this->getData(self::FIELD_2);
@@ -1460,7 +1468,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField2($field2): FormEntries
+    public function setField2($field2)
     {
 
         return $this->setData(self::FIELD_2, $field2);
@@ -1471,7 +1479,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField3(): string
+    public function getField3()
     {
 
         return $this->getData(self::FIELD_3);
@@ -1484,7 +1492,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField3($field3): FormEntries
+    public function setField3($field3)
     {
 
         return $this->setData(self::FIELD_3, $field3);
@@ -1495,7 +1503,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField4(): string
+    public function getField4()
     {
 
         return $this->getData(self::FIELD_4);
@@ -1508,7 +1516,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField4($field4): FormEntries
+    public function setField4($field4)
     {
 
         return $this->setData(self::FIELD_4, $field4);
@@ -1519,7 +1527,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField5(): string
+    public function getField5()
     {
 
         return $this->getData(self::FIELD_5);
@@ -1532,7 +1540,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField5($field5): FormEntries
+    public function setField5($field5)
     {
 
         return $this->setData(self::FIELD_5, $field5);
@@ -1543,7 +1551,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField6(): string
+    public function getField6()
     {
 
         return $this->getData(self::FIELD_6);
@@ -1556,7 +1564,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField6($field6): FormEntries
+    public function setField6($field6)
     {
 
         return $this->setData(self::FIELD_6, $field6);
@@ -1567,7 +1575,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField7(): string
+    public function getField7()
     {
 
         return $this->getData(self::FIELD_7);
@@ -1580,7 +1588,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField7($field7): FormEntries
+    public function setField7($field7)
     {
 
         return $this->setData(self::FIELD_7, $field7);
@@ -1591,7 +1599,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField8(): string
+    public function getField8()
     {
 
         return $this->getData(self::FIELD_8);
@@ -1604,7 +1612,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField8($field8): FormEntries
+    public function setField8($field8)
     {
 
         return $this->setData(self::FIELD_8, $field8);
@@ -1615,7 +1623,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField9(): string
+    public function getField9()
     {
 
         return $this->getData(self::FIELD_9);
@@ -1628,7 +1636,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField9($field9): FormEntries
+    public function setField9($field9)
     {
 
         return $this->setData(self::FIELD_9, $field9);
@@ -1639,7 +1647,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField10(): string
+    public function getField10()
     {
 
         return $this->getData(self::FIELD_10);
@@ -1652,7 +1660,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField10($field10): FormEntries
+    public function setField10($field10)
     {
 
         return $this->setData(self::FIELD_10, $field10);
@@ -1663,7 +1671,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField11(): string
+    public function getField11()
     {
 
         return $this->getData(self::FIELD_11);
@@ -1676,7 +1684,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField11($field11): FormEntries
+    public function setField11($field11)
     {
 
         return $this->setData(self::FIELD_11, $field11);
@@ -1687,7 +1695,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField12(): string
+    public function getField12()
     {
 
         return $this->getData(self::FIELD_12);
@@ -1700,7 +1708,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntries \Licentia\Forms\Api\Data\FormEntriesInterface
      */
-    public function setField12($field12): FormEntries
+    public function setField12($field12)
     {
 
         return $this->setData(self::FIELD_12, $field12);
@@ -1711,7 +1719,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField13(): string
+    public function getField13()
     {
 
         return $this->getData(self::FIELD_13);
@@ -1724,7 +1732,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField13($field13): FormEntriesInterface
+    public function setField13($field13)
     {
 
         return $this->setData(self::FIELD_13, $field13);
@@ -1735,7 +1743,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField14(): string
+    public function getField14()
     {
 
         return $this->getData(self::FIELD_14);
@@ -1748,7 +1756,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField14($field14): FormEntriesInterface
+    public function setField14($field14)
     {
 
         return $this->setData(self::FIELD_14, $field14);
@@ -1759,7 +1767,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField15(): string
+    public function getField15()
     {
 
         return $this->getData(self::FIELD_15);
@@ -1772,7 +1780,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField15($field15): FormEntriesInterface
+    public function setField15($field15)
     {
 
         return $this->setData(self::FIELD_15, $field15);
@@ -1783,7 +1791,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField16(): string
+    public function getField16()
     {
 
         return $this->getData(self::FIELD_16);
@@ -1796,7 +1804,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField16($field16): FormEntriesInterface
+    public function setField16($field16)
     {
 
         return $this->setData(self::FIELD_16, $field16);
@@ -1807,7 +1815,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField17(): string
+    public function getField17()
     {
 
         return $this->getData(self::FIELD_17);
@@ -1820,7 +1828,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField17($field17): FormEntriesInterface
+    public function setField17($field17)
     {
 
         return $this->setData(self::FIELD_17, $field17);
@@ -1831,7 +1839,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField18(): string
+    public function getField18()
     {
 
         return $this->getData(self::FIELD_18);
@@ -1844,7 +1852,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField18($field18): FormEntriesInterface
+    public function setField18($field18)
     {
 
         return $this->setData(self::FIELD_18, $field18);
@@ -1855,7 +1863,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField19(): string
+    public function getField19()
     {
 
         return $this->getData(self::FIELD_19);
@@ -1868,7 +1876,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField19($field19): FormEntriesInterface
+    public function setField19($field19)
     {
 
         return $this->setData(self::FIELD_19, $field19);
@@ -1879,7 +1887,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField20(): string
+    public function getField20()
     {
 
         return $this->getData(self::FIELD_20);
@@ -1892,7 +1900,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField20($field20): FormEntriesInterface
+    public function setField20($field20)
     {
 
         return $this->setData(self::FIELD_20, $field20);
@@ -1903,7 +1911,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField21(): string
+    public function getField21()
     {
 
         return $this->getData(self::FIELD_21);
@@ -1916,7 +1924,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField21($field21): FormEntriesInterface
+    public function setField21($field21)
     {
 
         return $this->setData(self::FIELD_21, $field21);
@@ -1927,7 +1935,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField22(): string
+    public function getField22()
     {
 
         return $this->getData(self::FIELD_22);
@@ -1940,7 +1948,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField22($field22): FormEntriesInterface
+    public function setField22($field22)
     {
 
         return $this->setData(self::FIELD_22, $field22);
@@ -1951,7 +1959,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField23(): string
+    public function getField23()
     {
 
         return $this->getData(self::FIELD_23);
@@ -1964,7 +1972,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField23($field23): FormEntriesInterface
+    public function setField23($field23)
     {
 
         return $this->setData(self::FIELD_23, $field23);
@@ -1975,7 +1983,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField24(): string
+    public function getField24()
     {
 
         return $this->getData(self::FIELD_24);
@@ -1988,7 +1996,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField24($field24): FormEntriesInterface
+    public function setField24($field24)
     {
 
         return $this->setData(self::FIELD_24, $field24);
@@ -1999,7 +2007,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return string
      */
-    public function getField25(): string
+    public function getField25()
     {
 
         return $this->getData(self::FIELD_25);
@@ -2012,7 +2020,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return FormEntriesInterface
      */
-    public function setField25($field25): FormEntriesInterface
+    public function setField25($field25)
     {
 
         return $this->setData(self::FIELD_25, $field25);
@@ -2023,7 +2031,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return $this
      */
-    public function setEmail($email): FormEntries
+    public function setEmail($email)
     {
 
         return $this->setData(self::EMAIL, $email);
@@ -2034,7 +2042,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return $this
      */
-    public function setRequiredEmailValidation($requiredEmailValidation): FormEntries
+    public function setRequiredEmailValidation($requiredEmailValidation)
     {
 
         return $this->setData(self::REQUIRED_EMAIL_VALIDATION, $requiredEmailValidation);
@@ -2043,7 +2051,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
 
         return $this->getData(self::EMAIL);
@@ -2052,7 +2060,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
     /**
      * @return bool
      */
-    public function getRequiredEmailValidation(): bool
+    public function getRequiredEmailValidation()
     {
 
         return $this->getData(self::REQUIRED_EMAIL_VALIDATION);
@@ -2063,7 +2071,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return $this
      */
-    public function setLink($link): FormEntries
+    public function setLink($link)
     {
 
         return $this->setData(self::LINK, $link);
@@ -2083,7 +2091,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
      *
      * @return $this
      */
-    public function setStoreId($storeId): FormEntries
+    public function setStoreId($storeId)
     {
 
         return $this->setData(self::STORE_ID, $storeId);

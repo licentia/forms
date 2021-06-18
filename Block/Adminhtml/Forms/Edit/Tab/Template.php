@@ -20,8 +20,6 @@
 
 namespace Licentia\Forms\Block\Adminhtml\Forms\Edit\Tab;
 
-use Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element;
-
 /**
  * Class Content
  *
@@ -70,7 +68,7 @@ class Template extends \Magento\Backend\Block\Widget\Form\Generic implements
     /**
      * @var \Magento\Cms\Model\Wysiwyg\Config
      */
-    protected \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig;
+    protected $wysiwygConfig;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -122,6 +120,7 @@ class Template extends \Magento\Backend\Block\Widget\Form\Generic implements
 
         $current = $this->_coreRegistry->registry('panda_form');
 
+        /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create(
             [
                 'data' => [
@@ -161,7 +160,7 @@ class Template extends \Magento\Backend\Block\Widget\Form\Generic implements
         // Setting custom renderer for content field to remove label column
         $renderer = $this->getLayout()
                          ->createBlock(
-                             Element::class
+                             'Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element'
                          )
                          ->setTemplate(
                              'Magento_Cms::page/edit/form/renderer/content.phtml'

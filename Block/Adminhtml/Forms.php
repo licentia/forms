@@ -27,7 +27,6 @@ namespace Licentia\Forms\Block\Adminhtml;
 class Forms extends \Magento\Backend\Block\Widget\Grid\Container
 {
 
-    /** @noinspection MagicMethodsValidityInspection */
     protected function _construct()
     {
 

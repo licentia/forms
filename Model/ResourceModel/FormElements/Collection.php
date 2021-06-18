@@ -33,7 +33,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * Configures collection
      *
      * @return void
-     * @noinspection MagicMethodsValidityInspection
      */
     protected function _construct()
     {

@@ -33,16 +33,16 @@ class FormsActions extends Column
     /**
      * Url path
      */
-    public const URL_PATH_EDIT = 'pandaf/forms/edit';
+    const URL_PATH_EDIT = 'pandaf/forms/edit';
 
-    public const URL_PATH_DELETE = 'pandaf/forms/delete';
+    const URL_PATH_DELETE = 'pandaf/forms/delete';
 
-    public const URL_PATH_RECORDS = 'pandaf/forms/entries';
+    const URL_PATH_RECORDS = 'pandaf/forms/entries';
 
     /**
      * @var UrlInterface
      */
-    protected UrlInterface $urlBuilder;
+    protected $urlBuilder;
 
     /**
      * Constructor

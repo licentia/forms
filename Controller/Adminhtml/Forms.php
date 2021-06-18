@@ -30,34 +30,34 @@ class Forms extends Action
     /**
      * Authorization level of a basic admin session
      */
-    public const ADMIN_RESOURCE = 'Licentia_Forms::forms';
+    const ADMIN_RESOURCE = 'Licentia_Forms::forms';
 
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
-    protected ?\Magento\Framework\Registry $registry;
+    protected $registry = null;
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */
-    protected \Magento\Framework\View\Result\PageFactory $resultPageFactory;
+    protected $resultPageFactory;
 
     /**
      * @var \Magento\Backend\Model\View\Result\ForwardFactory
      */
-    protected \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory;
+    protected $resultForwardFactory;
 
     /**
      * @var \Magento\Framework\View\Result\LayoutFactory
      */
-    protected \Magento\Framework\View\Result\LayoutFactory $layoutFactory;
+    protected $layoutFactory;
 
     /**
      * @var \Licentia\Forms\Model\FormsFactory
      */
-    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -67,17 +67,17 @@ class Forms extends Action
     /**
      * @var \Licentia\Forms\Model\FormElementsFactory
      */
-    protected \Licentia\Forms\Model\FormElementsFactory $formElementsFactory;
+    protected $formElementsFactory;
 
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory
      */
-    protected \Magento\Framework\App\Response\Http\FileFactory $fileFactory;
+    protected $fileFactory;
 
     /**
      * @var \Licentia\Forms\Model\FormEntriesFactory
      */
-    protected \Licentia\Forms\Model\FormEntriesFactory $formEntriesFactory;
+    protected $formEntriesFactory;
 
     /**
      * Forms constructor.
@@ -125,6 +125,7 @@ class Forms extends Action
     public function execute()
     {
 
+        /** @var \Licentia\Forms\Model\Forms $model */
         $model = $this->formsFactory->create();
         $entry = $this->formEntriesFactory->create();
 
@@ -133,7 +134,7 @@ class Forms extends Action
             $model->load($id);
         }
 
-        if ($id && !$model->getId() && $this->getRequest()->getActionName() !== 'ValidateEntry') {
+        if ($id && !$model->getId() && $this->getRequest()->getActionName() != 'ValidateEntry') {
             $this->messageManager->addErrorMessage(__('This Form no longer exists.'));
             $resultRedirect = $this->resultRedirectFactory->create();
 
@@ -160,6 +161,7 @@ class Forms extends Action
         $this->_request->setParams(['ctype' => $model->getEntryType()]);
 
         $eid = $this->getRequest()->getParam('eid');
+        /** @var \Licentia\Forms\Model\FormElements $element */
         $element = $this->formElementsFactory->create();
 
         if ($eid) {
@@ -176,7 +178,7 @@ class Forms extends Action
         $this->registry->register('panda_form_element', $element, true);
 
         if ($data = $this->_getSession()->getFormData(true)) {
-            if ($this->getRequest()->getActionName() === 'newEntry') {
+            if ($this->getRequest()->getActionName() == 'newEntry') {
                 $entry->addData($data);
             } else {
                 $model->addData($data);

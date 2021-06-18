@@ -23,7 +23,6 @@ namespace Licentia\Forms\Block\Form;
 use Licentia\Forms\Model\Forms;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Captcha\Block\Captcha;
 
 /**
  * Form Class
@@ -34,32 +33,32 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
     /**
      * @var \Licentia\Forms\Model\FormsFactory $formsFactory
      */
-    protected \Licentia\Forms\Model\FormsFactory $formsFactory;
+    protected $formsFactory;
 
     /**
      * @var Forms $form
      */
-    protected ?Forms $form;
+    protected $form = null;
 
     /**
      * @var \Magento\Customer\Model\Session
      */
-    protected \Magento\Customer\Model\Session $customerSession;
+    protected $customerSession;
 
     /**
      * @var \Licentia\Panda\Model\SubscribersFactory
      */
-    protected \Licentia\Panda\Model\SubscribersFactory $subscribersFactory;
+    protected $subscribersFactory;
 
     /**
      * @var \Licentia\Forms\Model\FormEntriesFactory
      */
-    protected \Licentia\Forms\Model\FormEntriesFactory $formEntriesFactory;
+    protected $formEntriesFactory;
 
     /**
      * @var \Magento\Captcha\Block\Captcha
      */
-    protected Captcha $captcha;
+    protected $captcha;
 
     /**
      * @var \Licentia\Forms\Model\FormElements
@@ -69,12 +68,12 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
     /**
      * @var DataPersistorInterface
      */
-    protected DataPersistorInterface $dataPersistor;
+    protected $dataPersistor;
 
     /**
      * @var \Licentia\Panda\Model\ExtraFieldsFactory
      */
-    protected \Licentia\Panda\Model\ExtraFieldsFactory $extraFieldsFactory;
+    protected $extraFieldsFactory;
 
     /**
      * @var \Licentia\Forms\Helper\Data
@@ -169,7 +168,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
     }
 
     /**
-     * @return array|string|string[]
+     * @return mixed|string
      */
     public function parseTemplate()
     {
@@ -204,7 +203,11 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 if ($element->getFormId() == $form->getId()) {
                     preg_match('/hide="(.*?)"/', $vars[0][$i], $parts);
 
-                    $parts = $parts[1] ?? null;
+                    if (isset($parts[1])) {
+                        $parts = $parts[1];
+                    } else {
+                        $parts = null;
+                    }
 
                     $template = str_replace($vars[0][$i], $this->getElementHtml($element, $parts), $template);
 
@@ -259,7 +262,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
      *
      * @return Forms
      */
-    public function getForm($formId = null): Forms
+    public function getForm($formId = null)
     {
 
         if (null === $this->form || $formId !== null) {
@@ -284,7 +287,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
     {
 
         $data = [];
-        $data['type'] = Captcha::class;
+        $data['type'] = 'Magento\Captcha\Block\Captcha';
         $data['form_id'] = 'panda_forms';
         $data['img_width'] = '230';
         $data['img_height'] = '50';
@@ -314,12 +317,12 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
         }
 
         $wasCountry = false;
-        if ($element->getType() === 'country') {
+        if ($element->getType() == 'country') {
             $wasCountry = true;
             $element->setType('select');
             $element->setOptions(Forms::getCountriesList());
         }
-        if ($element->getType() === 'rating') {
+        if ($element->getType() == 'rating') {
             $element->setOptions(
                 array_combine(range((int) $element->getStars(), 1), range((int) $element->getStars(), 1))
             );
@@ -415,13 +418,13 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                         $element->setDefault($optionsExtraField->getDefaultValue());
                     }
                 }
-                if ($element->getRequired() === 'select') {
+                if ($element->getRequired() == 'select') {
                     $names = ['' => __('-- Choose One --')] + $names;
                 }
             }
         }
 
-        if ($element->getType() === 'select') {
+        if ($element->getType() == 'select') {
             $elementDecoratorStart = '<select ';
             $elementDecoratorEnd = '</select>';
         }
@@ -439,28 +442,28 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
 
             $name = Forms::FIELD_IDENTIFIER . $element->getEntryCode();
             $id = $name;
-            if (count($names) > 1 && $element->getType() !== 'select') {
+            if (count($names) > 1 && $element->getType() != 'select') {
                 $name = Forms::FIELD_IDENTIFIER . $element->getEntryCode() . '[]';
 
                 $id = Forms::FIELD_IDENTIFIER . $element->getEntryCode() . $label;
 
                 $attrs['value'] = $label;
 
-                if ((count($names) > 1) &&
-                    is_array($element->getDefault()) &&
-                    in_array($label, $element->getDefault(), true)) {
-                    $element->setChecked(1);
+                if (count($names) > 1) {
+                    if (is_array($element->getDefault()) && in_array($label, $element->getDefault())) {
+                        $element->setChecked(1);
+                    }
                 }
             }
 
-            if ($element->getType() === 'email' && $this->customerSession->isLoggedIn()) {
+            if ($element->getType() == 'email' && $this->customerSession->isLoggedIn()) {
                 $element->setDefault(
                     $this->customerSession->getCustomer()
                                           ->getEmail()
                 );
             }
 
-            if ($element->getType() === 'phone' && $this->customerSession->isLoggedIn()) {
+            if ($element->getType() == 'phone' && $this->customerSession->isLoggedIn()) {
                 $customer = $this->customerSession->getCustomer();
 
                 $subscriber = $this->subscribersFactory->create()->load($customer->getId());
@@ -496,7 +499,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 }
             }
 
-            if ($element->getType() === 'phone' && !$element->getDefault()) {
+            if ($element->getType() == 'phone' && !$element->getDefault()) {
                 $code = \Licentia\Panda\Helper\Data::getPrefixForCountry($this->pandaHelper->getCountryCode());
 
                 if ($code) {
@@ -508,7 +511,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 $element->setDefault($this->pandaHelper->getCountryName());
             }
 
-            if ($element->getType() === 'hidden') {
+            if ($element->getType() == 'hidden') {
                 $params = explode(',', $element->getParams());
 
                 foreach ($params as $param) {
@@ -564,7 +567,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
 
                         if (is_file($file)) {
                             $info = pathinfo($file, PATHINFO_EXTENSION);
-                            if ($element->getType() === 'image' &&
+                            if ($element->getType() == 'image' &&
                                 in_array(strtolower($info), ['png', 'jpg', 'gif', 'jpeg'])) {
                                 $elementDecoratorEnd = '<div><img style="overflow:hidden; max-width:500px; ' .
                                                        'max-height:220px; margin:10px; " src="' . $newDir . '" />' .
@@ -701,7 +704,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 $attrs['data-validate']['required'] = true;
             }
 
-            if (($element->getType() === 'file' || $element->getType() === 'image') &&
+            if (($element->getType() == 'file' || $element->getType() == 'image') &&
                 $this->isEditing() && $element->getDefault()) {
                 unset($attrs['data-validate']);
             }
@@ -721,18 +724,20 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 $attrs['data-validate'] = \Zend_Json_Encoder::encode($attrs['data-validate']);
             }
 
-            if ($element->getType() === 'checkboxes' ||
-                $element->getType() === 'radios' ||
-                $element->getType() === 'rating') {
+            if ($element->getType() == 'checkboxes' ||
+                $element->getType() == 'radios' ||
+                $element->getType() == 'rating') {
                 $attrs['value'] = $label;
 
                 $checked = str_getcsv($element->getDefault());
-                if (in_array($label, $checked, true)) {
+                if (in_array($label, $checked)) {
                     $attrs['checked'] = 'checked';
                 }
             }
-            if (($element->getType() === 'checkbox') && $element->getDefault() === 'checked') {
-                $attrs['checked'] = 'checked';
+            if ($element->getType() == 'checkbox') {
+                if ($element->getDefault() == 'checked') {
+                    $attrs['checked'] = 'checked';
+                }
             }
 
             $html .= $optionStart;
@@ -747,40 +752,42 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 $attrsBuilt .= $this->escapeHtmlAttr($key) . "='{$this->escapeHtmlAttr($value)}'";
             }
 
-            if ($element->getType() === 'select') {
+            if ($element->getType() == 'select') {
                 $selected = '';
                 if (trim($label) == trim($element->getDefault())) {
                     $selected = 'selected ="selected" ';
                 }
 
                 $attrsBuilt = "value='{$this->escapeHtmlAttr($index)}' " . $selected . " >" . __($label);
+                $html .= $attrsBuilt;
+            } else {
+                $html .= $attrsBuilt;
             }
-            $html .= $attrsBuilt;
 
             $html .= $elementEnd;
 
-            if ($element->getType() === 'checkboxes' ||
-                $element->getType() === 'radios' ||
-                $element->getType() === 'rating') {
+            if ($element->getType() == 'checkboxes' ||
+                $element->getType() == 'radios' ||
+                $element->getType() == 'rating') {
                 $html .= "<label for='{$this->escapeHtmlAttr($attrs['id'])}'>" . __($label) . '</label>';
             }
 
-            if ($element->getType() === 'checkbox' && in_array('hint', $parts)) {
+            if ($element->getType() == 'checkbox' && in_array('hint', $parts)) {
                 $html .= "<label for='{$this->escapeHtmlAttr($attrs['id'])}'>" . $element->getHint() . '</label>';
             }
 
-            if ($element->getType() === 'html') {
+            if ($element->getType() == 'html') {
                 $html = $element->getHtml();
             }
 
-            if ($element->getType() === 'captcha') {
+            if ($element->getType() == 'captcha') {
                 $html = $this->getCaptchaElement();
             }
 
             $html .= $optionEnd;
         }
 
-        if ($element->getType() === 'select') {
+        if ($element->getType() == 'select') {
             $attrsBuilt = '';
 
             unset($attrs['value'], $attrs['type']);
@@ -789,33 +796,33 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 $attrsBuilt .= ' ' . $this->escapeHtmlAttr($key) . "='{$this->escapeHtmlAttr($value)}' ";
             }
 
-            $elementDecoratorStart .= $attrsBuilt . '>';
+            $elementDecoratorStart = $elementDecoratorStart . $attrsBuilt . '>';
         }
 
         $html = $elementDecoratorStart . $html . $elementDecoratorEnd;
 
-        if ($element->getType() !== 'html' &&
-            $element->getType() !== 'hidden' &&
+        if ($element->getType() != 'html' &&
+            $element->getType() != 'hidden' &&
             in_array('label', $parts)
         ) {
             $html = " <div class='label field'><label for='{$this->escapeHtmlAttr($element->getIdAttribute())}'>
              <span>" . __($element->getName()) . '</span></label></div>' . $html;
         }
 
-        if ($element->getType() !== 'html' &&
-            $element->getType() !== 'hidden' &&
-            $element->getType() !== 'checkbox' &&
+        if ($element->getType() != 'html' &&
+            $element->getType() != 'hidden' &&
+            $element->getType() != 'checkbox' &&
             in_array('hint', $parts)
         ) {
-            $html .= '<em>' . $element->getHint() . '</em>';
+            $html = $html . '<em>' . $element->getHint() . '</em>';
         }
 
-        if ($element->getType() !== 'hidden' && in_array('label', $parts)) {
-            $required = ($element->getRequired() === 1) ? "required" : "";
+        if ($element->getType() != 'hidden' && in_array('label', $parts)) {
+            $required = ($element->getRequired() == 1) ? "required" : "";
             $extraLabel = '';
 
             if ($this->isEditing() &&
-                ($element->getType() === 'file' || $element->getType() === 'image') &&
+                ($element->getType() == 'file' || $element->getType() == 'image') &&
                 !$element->getRequired() &&
                 $element->getDefault() &&
                 (int) $element->getAllowMultiple() <= 1
@@ -826,8 +833,8 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                               . '<label for="' . $deleteName . '">' . __('Delete file') . '</label>';
             }
 
-            if (($element->getType() === 'file' &&
-                 $element->getType() === 'image') &&
+            if (($element->getType() == 'file' &&
+                 $element->getType() == 'image') &&
                 $this->isEditing() &&
                 $element->getDefault()) {
                 $required = '';

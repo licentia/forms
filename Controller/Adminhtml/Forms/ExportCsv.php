@@ -22,7 +22,6 @@ namespace Licentia\Forms\Controller\Adminhtml\Forms;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ResponseInterface;
-use Licentia\Forms\Block\Adminhtml\Forms\Grid;
 
 /**
  * Class ExportCsv
@@ -51,7 +50,7 @@ class ExportCsv extends \Licentia\Forms\Controller\Adminhtml\Forms
         $fileName = 'form_entries_' . $name . '.csv';
 
         $content = $this->_view->getLayout()
-                               ->createBlock(Grid::class)
+                               ->createBlock('Licentia\Forms\Block\Adminhtml\Forms\Grid')
                                ->getCsv();
 
         return $this->fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);

@@ -19,8 +19,6 @@
 
 namespace Licentia\Forms\Block\Adminhtml\Forms;
 
-use Magento\Backend\Block\Widget\Button\SplitButton;
-
 /**
  * Class Edit
  *
@@ -32,14 +30,14 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     /**
      * @var \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory
      */
-    protected \Licentia\Forms\Model\ResourceModel\FormElements\CollectionFactory $formElementsCollection;
+    protected $formElementsCollection;
 
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
-    protected ?\Magento\Framework\Registry $registry;
+    protected $registry = null;
 
     /**
      * @param \Magento\Backend\Block\Widget\Context                              $context
@@ -59,7 +57,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
         parent::__construct($context, $data);
     }
 
-    /** @noinspection MagicMethodsValidityInspection */
     protected function _construct()
     {
 
@@ -96,11 +93,11 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 $this->getToolbar()
                      ->addChild(
                          'add-split-button',
-                         SplitButton::class,
+                         'Magento\Backend\Block\Widget\Button\SplitButton',
                          [
                              'id'           => 'save-split-button',
                              'label'        => __('New Form Element'),
-                             'class_name'   => SplitButton::class,
+                             'class_name'   => 'Magento\Backend\Block\Widget\Button\SplitButton',
                              'button_class' => 'widget-button-save',
                              'options'      => $this->_getSaveSplitButtonOptions(),
                          ]
@@ -111,11 +108,11 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $this->getToolbar()
                  ->addChild(
                      'save-split-button',
-                     SplitButton::class,
+                     'Magento\Backend\Block\Widget\Button\SplitButton',
                      [
                          'id'           => 'save-split-button',
                          'label'        => __('Save'),
-                         'class_name'   => SplitButton::class,
+                         'class_name'   => 'Magento\Backend\Block\Widget\Button\SplitButton',
                          'button_class' => 'widget-button-update',
                          'options'      => [
                              [
@@ -153,11 +150,11 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $this->getToolbar()
                  ->addChild(
                      'save-split-button',
-                     SplitButton::class,
+                     'Magento\Backend\Block\Widget\Button\SplitButton',
                      [
                          'id'           => 'save-split-button',
                          'label'        => __('Save Element'),
-                         'class_name'   => SplitButton::class,
+                         'class_name'   => 'Magento\Backend\Block\Widget\Button\SplitButton',
                          'button_class' => 'widget-button-update',
                          'options'      => [
                              [
@@ -192,14 +189,14 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $location = $this->getUrl(
                 '*/*/delete',
                 [
-                    'eid'        => $this->getRequest()->getParam('eid'),
+                    'eid'    => $this->getRequest()->getParam('eid'),
                     'active_tab' => 'element_section',
                 ]
             );
             $locationReturn = $this->getUrl(
                 '*/*/edit',
                 [
-                    'id'         => $this->getRequest()->getParam('id'),
+                    'id'     => $this->getRequest()->getParam('id'),
                     'active_tab' => 'element_section',
                 ]
             );
@@ -208,8 +205,8 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 'Are you sure? This will remove saved data for this field. You can mark this element as inactive and it will not be displayed.'
             );
 
-            $this->buttonList->update('delete', 'onclick', "deleteConfirm('$confirm','$location')");
-            $this->buttonList->update('back', 'onclick', "setLocation('$locationReturn')");
+            $this->buttonList->update('delete', 'onclick', "deleteConfirm('{$confirm}','{$location}')");
+            $this->buttonList->update('back', 'onclick', "setLocation('{$locationReturn}')");
 
             if (!$this->getRequest()->getParam('eid')) {
                 $this->buttonList->remove('delete');
@@ -237,6 +234,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $elementTypes = array_diff_key($elementTypes, array_flip($exclude));
         }
 
+        $i = 0;
         foreach ($elementTypes as $key => $elementType) {
             $options[] = [
                 'id'      => 'edit-button',
@@ -251,6 +249,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 'default' => false,
             ];
 
+            $i++;
         }
 
         return $options;
