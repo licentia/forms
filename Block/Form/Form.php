@@ -435,8 +435,12 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
             $optionStart = '';
             $optionEnd = '';
 
-            $label = trim($label);
-            $index = trim($index);
+            if ($label) {
+                $label = trim($label);
+            }
+            if ($index) {
+                $index = trim($index);
+            }
 
             $attrs = [];
 
@@ -721,7 +725,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
             }
 
             if (isset($attrs['data-validate'])) {
-                $attrs['data-validate'] = \Zend_Json_Encoder::encode($attrs['data-validate']);
+                $attrs['data-validate'] = json_encode($attrs['data-validate']);
             }
 
             if ($element->getType() == 'checkboxes' ||
@@ -729,7 +733,10 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
                 $element->getType() == 'rating') {
                 $attrs['value'] = $label;
 
-                $checked = str_getcsv($element->getDefault());
+                $checked = [];
+                if ($element->getDefault()) {
+                    $checked = str_getcsv($element->getDefault());
+                }
                 if (in_array($label, $checked)) {
                     $attrs['checked'] = 'checked';
                 }
@@ -754,7 +761,7 @@ class Form extends \Magento\Framework\View\Element\Template implements \Magento\
 
             if ($element->getType() == 'select') {
                 $selected = '';
-                if (trim($label) == trim($element->getDefault())) {
+                if ($label == $element->getDefault()) {
                     $selected = 'selected ="selected" ';
                 }
 
