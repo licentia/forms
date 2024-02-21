@@ -386,6 +386,7 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
             return;
         }
 
+        $this->prepareForDisplay();
         $storeId = $this->storeManager->getStore()->getId();
 
         if ($entry->getForm()->getNotifications()) {

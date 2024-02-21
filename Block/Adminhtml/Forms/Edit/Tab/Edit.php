@@ -539,7 +539,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Generic
                     'value'   => 0,
                     'options' => [1 => __('Yes'), 0 => __('No')],
                     'label'   => __('Encrypt'),
-                    'note'    => __("Encrypt file contents. If enabled, the only whay to view the file is from the Admin Interface."),
+                    'note'    => __("Encrypt file contents. If enabled, the only way to view the file is from the Admin Interface."),
                 ]
             )
                      ->setAfterElementHtml($html);
