@@ -470,6 +470,8 @@ class FormEntries extends \Magento\Framework\Model\AbstractModel implements Form
 
         /** @var FormElements $element */
         foreach ($this->getForm()->getElements()->addFieldToFilter('type', ['in' => ['image', 'file']]) as $element) {
+
+            $this->setData('field_' . $element->getEntryCode() . '_rendered', false);
             if ($this->getData('field_' . $element->getEntryCode())) {
                 $files = json_decode($this->getData('field_' . $element->getEntryCode()));
 
